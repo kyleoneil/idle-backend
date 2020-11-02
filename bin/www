@@ -13,7 +13,7 @@ const http = require('http');
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(appConfig.root);
+const port = normalizePort(appConfig.port);
 app.set('port', port);
 
 /**

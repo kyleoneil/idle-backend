@@ -1,4 +1,4 @@
 module.exports = {
-  root: '/',
+  apiRoot: '/',
   port: process.env.PORT || 3000,
 }
