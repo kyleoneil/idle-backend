@@ -7,6 +7,8 @@ const app = express();
 app.use(require('morgan')(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
   'stream': logger.stream,
 }));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 app.use(appConfig.apiRoot, require('./routes'));
 
 module.exports = app;
