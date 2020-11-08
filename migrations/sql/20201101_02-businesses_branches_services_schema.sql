@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2020 at 09:29 AM
+-- Generation Time: Nov 08, 2020 at 12:03 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -34,6 +34,16 @@ CREATE TABLE `branches` (
   `business_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `branches`
+--
+
+INSERT INTO `branches` (`id`, `name`, `business_id`) VALUES
+(1, 'XYZ - Mandaue City', 2),
+(2, 'XYZ - Fuente', 2),
+(3, 'ABC - Seaside', 1),
+(4, 'ABC - Ayala', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -45,20 +55,35 @@ CREATE TABLE `businesses` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `businesses`
+--
+
+INSERT INTO `businesses` (`id`, `name`) VALUES
+(1, 'ABC Banking Company'),
+(2, 'XYZ Medical Operations');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `services`
+-- Table structure for table `roles`
 --
 
-CREATE TABLE `services` (
+CREATE TABLE `roles` (
   `id` bigint(20) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `branch_id` bigint(20) NOT NULL,
-  `last_in_queue` bigint(20) NOT NULL DEFAULT 0,
-  `current_queue` int(11) NOT NULL DEFAULT 0,
-  `eta_handling_in_seconds` bigint(20) NOT NULL
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `active`) VALUES
+(1, 'SUPERADMIN', 1),
+(2, 'BUSINESS_OWNER', 1),
+(3, 'BUSINESS_TELLER', 1),
+(4, 'CUSTOMER', 1);
 
 --
 -- Indexes for dumped tables
@@ -79,11 +104,10 @@ ALTER TABLE `businesses`
   ADD KEY `INDEX` (`name`);
 
 --
--- Indexes for table `services`
+-- Indexes for table `roles`
 --
-ALTER TABLE `services`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_branch_id` (`branch_id`);
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -93,19 +117,13 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `businesses`
 --
 ALTER TABLE `businesses`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `services`
---
-ALTER TABLE `services`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -116,12 +134,6 @@ ALTER TABLE `services`
 --
 ALTER TABLE `branches`
   ADD CONSTRAINT `fk_business_id` FOREIGN KEY (`business_id`) REFERENCES `businesses` (`id`);
-
---
--- Constraints for table `services`
---
-ALTER TABLE `services`
-  ADD CONSTRAINT `fk_branch_id` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
