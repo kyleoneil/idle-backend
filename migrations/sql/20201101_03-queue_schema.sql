@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2020 at 09:29 AM
+-- Generation Time: Nov 08, 2020 at 12:04 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -32,8 +32,9 @@ CREATE TABLE `queues` (
   `id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `service_id` bigint(20) NOT NULL,
+  `teller_id` bigint(20) NOT NULL,
   `queue_number` bigint(20) NOT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'IN-QUEUE'
+  `status` enum('IN_QUEUE','IN_PROGRESS','NO_SHOW','COMPLETED') NOT NULL DEFAULT 'IN_QUEUE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -46,7 +47,8 @@ CREATE TABLE `queues` (
 ALTER TABLE `queues`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_service_id` (`service_id`),
-  ADD KEY `INDEX` (`user_id`,`service_id`) USING BTREE;
+  ADD KEY `INDEX` (`user_id`,`service_id`) USING BTREE,
+  ADD KEY `fk_teller_id` (`teller_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -67,6 +69,7 @@ ALTER TABLE `queues`
 --
 ALTER TABLE `queues`
   ADD CONSTRAINT `fk_service_id` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`),
+  ADD CONSTRAINT `fk_teller_id` FOREIGN KEY (`teller_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
