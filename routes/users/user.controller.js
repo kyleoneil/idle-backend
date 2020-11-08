@@ -1,6 +1,6 @@
 const { create, getUserByUserId, getUsers, updateUser, deleteUser, getUserByUserEmail } = require('./user.service');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 let errorMsg = {};
@@ -105,7 +105,7 @@ module.exports = {
             }else if (!result){
                 return res.json({
                     success: 0,
-                    data: "Invalid Email or Password."
+                    data: "Invalid Email or Password. 1"
                 });
             }else{
                 let sqlRes = bcrypt.compareSync(user.password, result.password);
@@ -117,12 +117,12 @@ module.exports = {
                     return res.json({
                         success: 1,
                         data: "Successfully logged in",
-                        token: jsonToken
+                        token: jsonToken,
                     });
                 }else{
                     return res.json({
                         success: 0,
-                        data: "Invalid Email or Password."
+                        data: "Invalid Email or Password.2",
                     });
                 }
                 
