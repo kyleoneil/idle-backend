@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2020 at 09:26 AM
+-- Generation Time: Nov 08, 2020 at 12:02 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -30,17 +30,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `roles` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`) VALUES
-(1, 'SUPERADMIN'),
-(2, 'BUSINESS_OWNER'),
-(3, 'USER');
+INSERT INTO `roles` (`id`, `name`, `active`) VALUES
+(1, 'SUPERADMIN', 1),
+(2, 'BUSINESS_OWNER', 1),
+(3, 'BUSINESS_TELLER', 1),
+(4, 'CUSTOMER', 1);
 
 -- --------------------------------------------------------
 
@@ -53,7 +55,6 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `birthdate` date NOT NULL,
   `role_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -61,8 +62,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `name`, `birthdate`, `role_id`) VALUES
-(1, 'admin@idle.com', '$2b$10$RZW1btm8DZjfnxx0trUUcOt2v7X00UPftEMuey6JFc6n7Umt25gZa', 'Administrator', '0000-00-00', 1);
+INSERT INTO `users` (`id`, `email`, `password`, `name`, `role_id`) VALUES
+(1, 'admin@idle.com', '$2b$10$RZW1btm8DZjfnxx0trUUcOt2v7X00UPftEMuey6JFc6n7Umt25gZa', 'Administrator', 1);
 
 --
 -- Indexes for dumped tables
@@ -86,16 +87,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
