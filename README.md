@@ -40,4 +40,19 @@ Idle Backend is a service which holds all APIs for the entire IDLE ecosystem.
     # or to run with hot reload enabled
     npm run dev
   ```
-  
+
+## How to generate models
+
+We are doing hybrid approach in generating the models and doing [migrations](https://sequelize.org/master/manual/migrations.html). Here are the steps:
+
+### Prerequisite
+
+- `npm install --save-dev sequelize-cli`
+
+### Steps
+
+1. Execute `npx sequelize-cli model:generate --name Service --attributes name:string` to generate the files in models and migrations
+2. Go to [models](./models) and manually edit the generated model file to achieve the desired schema.
+3. TODO: what about [migrations](./migrations)?
+
+The other way is to manually copy existing models and migrations and do the necessary adjustments.
