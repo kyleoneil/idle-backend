@@ -15,4 +15,4 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(appConfig.apiRoot, require('./routes'));
 
-module.exports = app;
+module.exports = app; 
