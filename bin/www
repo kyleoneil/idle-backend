@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const appConfig = require('./../app-config');
+const appConfig = require('./../config/config');
 const app = require('../app');
 const debug = require('debug')('idle-api:server');
 const http = require('http');
@@ -88,4 +88,13 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+
+  process.on('SIGTERM', () => {
+    beanstalkdService.close();
+    process.exit(0);
+  });
+  process.on('SIGINT', () => {
+    beanstalkdService.close();
+    process.exit(0);
+  });
 }
