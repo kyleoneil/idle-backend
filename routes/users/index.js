@@ -1,30 +1,47 @@
-const {createUser, getUserByUserId, getUsers, updateUser, deleteUser, login} = require("./user.controller");
-
 const router = require('express').Router();
 const auth = require('./../../auth/token_validation');
+const dateUtil = require('./../../utils/dateUtil');
+const userService = require('./../../services/user.service');
 
-router.post('/create',  (req, res) => {
-  let user = req.body;
-  let salt = bcrypt.genSaltSync(saltRounds);
-  user.password = bcrypt.hashSync(user.password, salt);
-  create(user, (err, results) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        success: 0,
-        message: "DB Connection error."
-      })
+router.post('/', (req, res) => {
+  /**
+   * @type {{firstname:string, lastname:string, birthdate:string, email:string,password:string}}
+   */
+  const body = req.body;
+  // Validation should happen in controller level
+  if (!body.firstname || !body.lastname || !body.email || !body.password) {
+    res.status(400).json({message: "First name, last name, email and password are required."});
+    return;
+  }
+  // Birthdate is optional?
+  if (body.birthdate && !dateUtil.isValidDateString(body.birthdate)) {
+    res.status(400).json({message: "Invalid birthdate format. Should be MM/dd/yyyy."});
+    return;
+  }
+  // You cannot use await here. See https://javascript.info/async-await#await
+  return userService.userExists(body.email).then((exists) => {
+    if (exists) {
+      res.status(400).json({message: "User already exits"});
+    } else {
+      userService.create(body).then((user) => res.json({id: user.id, message: "User successfully created."}))
     }
-    return res.status(200).json({
-      success: 1,
-      data: results
-    })
   })
 });
-router.get('/getuser',auth.checkToken, getUsers);
-router.get('/:id', auth.checkToken, getUserByUserId);
-router.patch('/', auth.checkToken, updateUser);
-router.delete('/', auth.checkToken, deleteUser);
-router.post('/login', login);
+
+router.get('/:id', (req, res) => {
+  let {pageNo, resultsPerPage} = req.query;
+  return userService.findById(req.params.id).then((user) => {
+    res.json(user); // res.json is equivalent to res.status(200).json(...);
+  })
+});
+
+router.get('/', (req, res) => {
+  let {pageNo, resultsPerPage} = req.query;
+  return userService.findPaginated(pageNo, resultsPerPage).then((results) => {
+    res.json(results); // res.json is equivalent to res.status(200).json(...);
+  })
+});
+
+// router.post('/login', login);
 
 module.exports = router;

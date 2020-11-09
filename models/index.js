@@ -1,6 +1,6 @@
 'use strict';
 
-import {DataTypes, Options} from "sequelize";
+const {DataTypes, Options} = require("sequelize");
 
 const fs = require('fs');
 const path = require('path');
@@ -9,9 +9,9 @@ const basename = path.basename(__filename);
 const config = require('./../config/config');
 const db = {};
 
-/** @type {Options} */
-const options = {dialect: config.dbDialect}
-let sequelize = new Sequelize(config.dbName, config.dbUser, config.dbPass, options);
+let sequelize = new Sequelize(config.dbName, config.dbUser, config.dbPass, {
+  dialect: config.dbDialect
+});
 
 fs
   .readdirSync(__dirname)

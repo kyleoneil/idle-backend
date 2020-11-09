@@ -16,9 +16,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      /** @type {Role} */
-      const {Role} = models.Role;
-      User.hasOne(Role); // Will create role_id fk field in users table
+      User.hasOne(models.Role);user
     }
   }
   User.init({

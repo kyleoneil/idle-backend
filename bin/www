@@ -5,6 +5,7 @@
  */
 
 const appConfig = require('./../config/config');
+const logger = require('./../utils/logger');
 const app = require('../app');
 const debug = require('debug')('idle-api:server');
 const http = require('http');
@@ -88,4 +89,18 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+
+  const db = require('./../models');
+  logger.info(`App started at port ${appConfig.port} with api root ${appConfig.apiRoot}.`);
+  const cleanupThenExit = (exitCb) => {
+    return () => {
+      db.sequelize.connectionManager.close().then(() => {
+        logger.info('App exited gracefully')
+        exitCb && exitCb();
+      });
+    }
+  }
+  process.once('SIGTERM', cleanupThenExit(() => process.exit(0)));
+  process.once('SIGINT', cleanupThenExit(() => process.exit(0)));
+  process.once('SIGUSR2', cleanupThenExit(() => process.kill(process.pid, 'SIGUSR2')));
 }
