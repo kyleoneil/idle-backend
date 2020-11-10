@@ -14,8 +14,9 @@ router.post('/login', (req, res) => {
     .catch(errorHandler.handleError(res));
 });
 router.post('/logout', (req, res) => {
-  /**
-   * @type {{firstname:string, lastname:string, birthdate:string, email:string,password:string}}
-   */
+  const jwtUser = req.user;
+  return authService.logout(jwtUser.email)
+    .then(() => res.json({message: 'Logout successful.'}))
+    .catch(errorHandler.handleError(res));
 });
 module.exports = router;

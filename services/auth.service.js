@@ -18,6 +18,14 @@ module.exports = {
       email,
     }
     o.token = 'Bearer ' + jwt.sign(o, secretKey, {}); // TODO: expiry?
+    user.token = o.token;
+    user.lastLogin = new Date();
+    await user.save();
     return o;
+  },
+  logout: async (email) => {
+    const user = await userService.findByEmail(email);
+    user.token = null;
+    return user.save();
   }
 }

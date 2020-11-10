@@ -42,6 +42,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     birthdate: DataTypes.DATEONLY,
+    token: DataTypes.STRING,
+    lastLogin: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'User',

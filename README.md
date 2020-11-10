@@ -71,3 +71,7 @@ We are doing hybrid approach in generating the models and doing [migrations](htt
 3. Go to [migrations](./migrations) and update the expected schema. See [sequelize migrations](https://sequelize.org/master/manual/migrations.html) for the guide.
 
 The other way is to manually copy existing models and migrations and do the necessary adjustments.
+
+## Notes
+
+- See [QueryInterface](https://github.com/sequelize/sequelize/blob/febc083adee2cd3e6f24b18a556acdc4c4f50f96/src/dialects/abstract/query-interface.js#L11) for available functions that can be used in [migrations](./migrations) scripts.
