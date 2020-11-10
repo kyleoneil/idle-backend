@@ -1,6 +1,6 @@
 'use strict';
 
-const {DataTypes, Options} = require("sequelize");
+const {DataTypes} = require("sequelize");
 
 const fs = require('fs');
 const path = require('path');
@@ -9,8 +9,15 @@ const basename = path.basename(__filename);
 const config = require('./../config/config');
 const db = {};
 
+const dialectOptions = {};
+if (config.dbDialect === 'mariadb') {
+  // See https://github.com/mariadb-corporation/mariadb-connector-nodejs/issues/48#issuecomment-490319977
+  process.env.db_timezone = "Etc/GMT0";
+  dialectOptions.timezone = process.env.db_timezone;
+}
 let sequelize = new Sequelize(config.dbName, config.dbUser, config.dbPass, {
-  dialect: config.dbDialect
+  dialect: config.dbDialect,
+  dialectOptions,
 });
 
 fs
