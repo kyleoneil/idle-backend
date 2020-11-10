@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.hasOne(models.Role);user
+      // Add role_id bigint not null to users table
+      const Role = models.Role;
+      Role.hasMany(User, {foreignKey: {allowNull: false}});
+      User.belongsTo(Role);
     }
   }
   User.init({

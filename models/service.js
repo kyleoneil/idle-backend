@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Service.hasMany(models.Branch);
+      const Branch = models.Branch;
+      Branch.hasMany(Service, {foreignKey: {allowNull: false}});
+      Service.belongsTo(Branch);
     }
   }
   Service.init({
@@ -27,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Service',
     underscored: true,
-    indexes: [{unique: true, fields: ['branch_id', 'name']}]
+    // indexes: [{unique: true, fields: ['branch_id', 'name']}] // TODO: for some reason, it does not work
   });
   return Service;
 };
