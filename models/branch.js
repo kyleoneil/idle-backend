@@ -24,14 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.TEXT,
       allowNull: false,
-    },
-    business_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      // references: {
-      //
-      // },
-      // referencesKey: "id",
     }
   }, {
     sequelize,

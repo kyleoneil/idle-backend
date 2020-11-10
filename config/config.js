@@ -12,6 +12,11 @@ const config = {
     database: process.env.DB_NAME || 'idle',
     host: process.env.DB_HOST || 'localhost',
     dialect: process.env.DB_DIALECT || 'mariadb',
+    dialectOptions: {timezone: "Etc/GMT0"},
+    // Use a different storage. Default: none
+    seederStorage: "json",
+    // Use a different file name. Default: sequelize-data.json
+    seederStoragePath: "sequelize-data-dev.json",
   },
   production: {
     username: process.env.DB_USER,
@@ -19,6 +24,7 @@ const config = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT || 'mariadb',
+    dialectOptions: {timezone: "Etc/GMT0"}
   }
 };
 const env = process.env.NODE_ENV || 'development';
