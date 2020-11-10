@@ -11,15 +11,6 @@ module.exports = {
       // DO NOT put detailed error message. See https://owasp.org/www-community/Improper_Error_Handling
       throw new AuthenticationError("User with email and password not found")
     }
-    // We will deal with the expiry later
-    const _generateToken = (id, name, email, expiresIn) => {
-      const o = {id, name, email};
-      const options = {};
-      if (expiresIn) {
-        options.expiresIn = expiresIn;
-      }
-      return 'Bearer ' + jwt.sign(o, secretKey, options);
-    };
     const o = {
       id: user.id,
       name: user.name,

@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const auth = require('./../../auth/token_validation');
-const dateUtil = require('./../../utils/dateUtil');
-const userService = require('./../../services/user.service');
+const dateUtil = require('./../utils/dateUtil');
+const userService = require('./../services/user.service');
+const errorHandler = require('./errorHandler');
 
 router.post('/', (req, res) => {
   /**
@@ -23,25 +23,31 @@ router.post('/', (req, res) => {
     if (exists) {
       res.status(400).json({message: "User already exits"});
     } else {
-      userService.create(body).then((user) => res.json({id: user.id, message: "User successfully created."}))
+      userService.create(body)
+        .then((user) => res.json({id: user.id, message: "User successfully created."}))
+        .catch(errorHandler.handleError(res));
     }
   })
 });
 
 router.get('/:id', (req, res) => {
   let {pageNo, resultsPerPage} = req.query;
-  return userService.findById(req.params.id).then((user) => {
-    res.json(user); // res.json is equivalent to res.status(200).json(...);
-  })
+  return userService.findById(req.params.id)
+    .then((user) => res.json(user)) // res.json is equivalent to res.status(200).json(...);
+    .catch(errorHandler.handleError(res));
 });
 
 router.get('/', (req, res) => {
   let {pageNo, resultsPerPage} = req.query;
-  return userService.findPaginated(pageNo, resultsPerPage).then((results) => {
-    res.json(results); // res.json is equivalent to res.status(200).json(...);
-  })
+  return userService.findPaginated(pageNo, resultsPerPage)
+    .then((results) => res.json(results))
+    .catch(errorHandler.handleError(res));
 });
 
-// router.post('/login', login);
+router.post('/', (req, res) => {
+  /**
+   * @type {{firstname:string, lastname:string, birthdate:string, email:string,password:string}}
+   */
+});
 
 module.exports = router;

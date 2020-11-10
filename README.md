@@ -25,16 +25,16 @@ Idle Backend is a service which holds all APIs for the entire IDLE ecosystem.
 
 ### Steps
 
-- Checkout the project
+1. Checkout the project
   ```shell
     git clone git@github.com:kyleoneil/idle-backend.git
   ```
-- Download the dependencies
+2. Download the dependencies
   ```shell
     cd idle-backend
     npm i
   ```
-- Run the project
+3. Run the project
   ```shell
     npm start
     # or to run with hot reload enabled
@@ -42,6 +42,19 @@ Idle Backend is a service which holds all APIs for the entire IDLE ecosystem.
   ```
   
 **Important!!!** In development mode, this will automatically create the tables.
+
+## How to populate database with data locally
+
+Folder [seeders](./seeders) contains the script that will populate the database with data. Here's how to populate an empty db with data
+
+### Prerequisite
+
+- `npm install --save-dev sequelize-cli`
+- Database with tables. In dev environment, you can either run the app to auto-populate the db with tables or execute `npx sequelize-cli db:migrate`.
+
+### Steps
+
+Just execute `npx sequelize-cli db:seed:all` 
 
 ## How to generate models
 
@@ -53,7 +66,7 @@ We are doing hybrid approach in generating the models and doing [migrations](htt
 
 ### Steps
 
-1. Execute `npx sequelize-cli model:generate --name Service --attributes name:string` to generate the files in models and migrations
+1. Execute `npx sequelize-cli model:generate --name create-role --attributes name:string` to generate the files in models and migrations
 2. Go to [models](./models) and manually edit the generated model file to achieve the desired schema. Note: set `underscored: true` to convert columns from CamelCase to snake_case. 
 3. Go to [migrations](./migrations) and update the expected schema. See [sequelize migrations](https://sequelize.org/master/manual/migrations.html) for the guide.
 
