@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-const appConfig = require('./../app-config');
+const appConfig = require('./../config/config');
+const logger = require('./../utils/logger');
 const app = require('../app');
 const debug = require('debug')('idle-api:server');
 const http = require('http');
@@ -26,7 +27,6 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -88,4 +88,30 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  logger.info(`App started at port ${appConfig.port} with api root ${appConfig.apiRoot}.`);
+}
+
+const db = require('./../models');
+const shutdownHooks = () => {
+  const cleanupThenExit = (exitCb) => {
+    return () => {
+      db.sequelize.connectionManager.close().then(() => {
+        logger.info('App exited gracefully')
+        exitCb && exitCb();
+      });
+    }
+  }
+  process.once('SIGTERM', cleanupThenExit(() => process.exit(0)));
+  process.once('SIGINT', cleanupThenExit(() => process.exit(0)));
+  process.once('SIGUSR2', cleanupThenExit(() => process.kill(process.pid, 'SIGUSR2')));
+}
+if (process.env.NODE_ENV !== 'production') {
+  (async () => {
+    await db.sequelize.sync();
+    server.listen(port);
+    shutdownHooks();
+  })();
+} else {
+  server.listen(port);
+  shutdownHooks();
 }
