@@ -2,6 +2,7 @@ const {User, Role} = require('./../models');
 const bcrypt = require('bcrypt');
 const {saltRounds} = require('./../config/config');
 const roleService = require('./role.service');
+const { static } = require('express');
 
 const findByEmail = (email, loadRole = false) => {
   const findOptions = {where: {email}};
@@ -31,8 +32,10 @@ module.exports = {
     return !!user; // or user != null
   },
   findById: async (id) => {
-    const user = await User.findByPk(id);
-    delete user.password; // Remove password prior to returning the user
+    const user = await User.findOne({
+      where: {id: id},
+      attributes: { exclude: ['password'] }
+    });
     return user;
   },
   findByEmail,
@@ -44,9 +47,17 @@ module.exports = {
    */
   findPaginated: async (pageNo = 1, resultsPerPage = 10) => {
     // TODO: Implement this. Note: make sure password is removed prior to return
+    // TODO Completed 
+    const pageOffset = resultsPerPage * (pageNo - 1);
+    const total_queue_records = await User.count();
+    const userPaginated = await User.findAll({ 
+      offset: pageOffset, 
+      limit: 10, 
+      attributes: { exclude: ['password'] }
+    })
     return {
-      totalRecords: 0,
-      data: [{}]
+      totalRecords: total_queue_records,
+      data: userPaginated
     }
   }
 }
