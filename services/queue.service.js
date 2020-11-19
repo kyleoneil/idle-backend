@@ -18,7 +18,6 @@ module.exports = {
     data.service_id = body.service_id;
     data.queue_number = service.last_in_queue + 1;
     Services.updateQueue(serviceId);
-    console.log(data);
     const queue = await Queue.create(data);
     return queue.id;
   }
