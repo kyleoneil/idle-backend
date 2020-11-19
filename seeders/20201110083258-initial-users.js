@@ -14,6 +14,30 @@ module.exports = {
         email: 'admin@idle.com',
         password: 'admin',
         roleName: 'SUPER_ADMIN'
+      }),
+      await userService.create({
+        firstname: 'test',
+        lastname: 'businessowner',
+        birthdate: '06/09/1991',
+        email: 'owner@idle.com',
+        password: 'businessowner',
+        roleName: 'BUSINESS_OWNER'
+      }),
+      await userService.create({
+        firstname: 'test',
+        lastname: 'businessteller',
+        birthdate: '11/11/1994',
+        email: 'teller@idle.com',
+        password: 'businessteller',
+        roleName: 'BUSINESS_TELLER'
+      }),
+      await userService.create({
+        firstname: 'test',
+        lastname: 'customer',
+        birthdate: '03/05/1997',
+        email: 'customer@idle.com',
+        password: 'customer',
+        roleName: 'CUSTOMER'
       })
     }
   },
@@ -21,7 +45,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     if (env === 'development') {
       const Op = Sequelize.Op
-      await queryInterface.bulkDelete('users', {email: {[Op.in]: ['admin@idle.com']}}, {});
+      await queryInterface.bulkDelete('users', {id: {[Op.in]: [1,2,3,4]}}, {});
     }
   }
 };
