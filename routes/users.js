@@ -3,7 +3,7 @@ const dateUtil = require('./../utils/dateUtil');
 const userService = require('./../services/user.service');
 const errorHandler = require('./errorHandler');
 
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
   /**
    * @type {{firstname:string, lastname:string, birthdate:string, email:string,password:string}}
    */

@@ -1,0 +1,80 @@
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:21:40.054Z"}
+{"message":"App exited gracefully","level":"info","timestamp":"2020-11-19T03:21:47.492Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:21:57.043Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:22:56.041Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:25:23.116Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:25:23.126Z"}
+{"message":"POST /api/users/create 401 149.352 ms - 46","level":"info","timestamp":"2020-11-19T03:25:23.169Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:26:06.153Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:26:06.487Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:26:06.489Z"}
+{"message":"POST /api/users/ 401 54.280 ms - 46","level":"info","timestamp":"2020-11-19T03:26:06.509Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:26:21.919Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:26:21.921Z"}
+{"message":"POST /api/users/ 401 8.601 ms - 46","level":"info","timestamp":"2020-11-19T03:26:21.924Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:27:18.651Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:27:18.655Z"}
+{"message":"POST /api/users/ 401 14.365 ms - 46","level":"info","timestamp":"2020-11-19T03:27:18.662Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:27:50.205Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:27:50.428Z"}
+{"message":"POST /api/users/ 401 293.768 ms - 46","level":"info","timestamp":"2020-11-19T03:27:50.496Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:30:15.458Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:30:15.462Z"}
+{"message":"POST /api/users/ 401 13.762 ms - 46","level":"info","timestamp":"2020-11-19T03:30:15.469Z"}
+{"message":"{\"message\":\"User with email and password not found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:47:08.809Z"}
+{"name":"","status":401,"level":"error","message":"undefined","timestamp":"2020-11-19T03:47:08.818Z"}
+{"message":"POST /api/auth/login 401 119.363 ms - 52","level":"info","timestamp":"2020-11-19T03:47:08.827Z"}
+{"message":"{\"message\":\"User with email and password not found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:47:44.164Z"}
+{"name":"","status":401,"level":"error","message":"undefined","timestamp":"2020-11-19T03:47:44.167Z"}
+{"message":"POST /api/auth/login 401 36.354 ms - 52","level":"info","timestamp":"2020-11-19T03:47:44.171Z"}
+{"message":"App exited gracefully","level":"info","timestamp":"2020-11-19T03:47:54.424Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:48:02.944Z"}
+{"message":"{\"message\":\"User with email and password not found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:48:11.647Z"}
+{"name":"","status":401,"level":"error","message":"undefined","timestamp":"2020-11-19T03:48:11.652Z"}
+{"message":"POST /api/auth/login 401 224.131 ms - 52","level":"info","timestamp":"2020-11-19T03:48:11.681Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:49:46.234Z"}
+{"message":"POST /api/auth/login 200 314.116 ms - 313","level":"info","timestamp":"2020-11-19T03:49:53.758Z"}
+{"message":"{\"message\":\"Format is Authorization: Bearer [token]\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:54:03.242Z"}
+{"name":"UnauthorizedError","message":"Format is Authorization: Bearer [token]","code":"credentials_bad_format","status":401,"inner":{"message":"Format is Authorization: Bearer [token]"},"level":"error","timestamp":"2020-11-19T03:54:03.251Z"}
+{"message":"POST /api/users/ 401 34.654 ms - 53","level":"info","timestamp":"2020-11-19T03:54:03.267Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-19T03:54:37.227Z"}
+{"message":"{\"message\":\"Cannot read property 'id' of null\",\"statusCode\":500}","level":"error","timestamp":"2020-11-19T03:54:37.231Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-19T03:54:37.235Z"}
+{"message":"POST /api/users/ 500 92.714 ms - 47","level":"info","timestamp":"2020-11-19T03:54:37.242Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:57:53.619Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-19T03:57:56.985Z"}
+{"message":"{\"message\":\"Cannot read property 'id' of null\",\"statusCode\":500}","level":"error","timestamp":"2020-11-19T03:57:56.987Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-19T03:57:56.990Z"}
+{"message":"POST /api/users/create 500 234.271 ms - 47","level":"info","timestamp":"2020-11-19T03:57:57.017Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:59:49.193Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:00:04.902Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:00:35.550Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:00:36.764Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:00:54.370Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:03:15.383Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:03:22.279Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:03:56.322Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:04:16.558Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:05:05.130Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:06:50.469Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:06:56.501Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:07:19.027Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:07:40.189Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:07:55.554Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:24.209Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:29.305Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:39.792Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:51.456Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:58.314Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:09:02.618Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:10:33.180Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:10:47.470Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:10:56.345Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:11:05.367Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:11:11.809Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:11:38.977Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:12:00.554Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:12:36.104Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:12:50.072Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:23:14.748Z"}
+{"message":"App exited gracefully","level":"info","timestamp":"2020-11-19T04:25:26.644Z"}

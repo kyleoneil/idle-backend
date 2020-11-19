@@ -7,8 +7,8 @@ const config = {
   saltRounds: process.env.SALT_ROUNDS || 10,
   secretKey: process.env.SECRET_KEY || '!dl3-b@ck3nd$',
   development: {
-    username: process.env.DB_USER || 'idle',
-    password: process.env.DB_PASS || 'idle',
+    username: process.env.DB_USER || 'root',
+    password: process.env.DB_PASS || '',
     database: process.env.DB_NAME || 'idle',
     host: process.env.DB_HOST || 'localhost',
     dialect: process.env.DB_DIALECT || 'mariadb',
