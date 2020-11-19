@@ -25,6 +25,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    last_in_queue: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: 0
+    },
+    current_queue: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: 0
+    },
   }, {
     sequelize,
     modelName: 'Service',
