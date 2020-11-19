@@ -21,6 +21,16 @@ module.exports = {
         },
         allowNull: false
       },
+      last_in_queue: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: 0
+      },
+      current_queue: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: 0
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE
