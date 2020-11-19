@@ -9,11 +9,19 @@ module.exports = {
    */
     createBranch: async (body) => {
         const businessname = body.businessname;
-        const business = await businessService.findBusiness(businessname);
+        const business = await businessService.findBusinessByName(businessname);
         const data = {BusinessId: business.id, ...body};
         data.name = body.branchname;
         const branch = await Branch.create(data);
         return branch.id;
     },
-    findByName: (name) => Branch.findOne({where: {name}})
+    findByName: async (name) => {
+        const branch = Branch.findOne({where: {name}});
+        return branch;
+    }, 
+
+    findById: async (id) => {
+       const branch = Branch.findOne({where: {id}});
+       return branch;
+    } 
 }

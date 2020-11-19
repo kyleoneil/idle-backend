@@ -20,5 +20,21 @@ module.exports = {
     Services.updateQueue(serviceId);
     const queue = await Queue.create(data);
     return queue.id;
+  },
+
+  getQueues: async (serviceId) => {
+    const queues = Queue.findAll({ where: {service_id: serviceId} });
+    return queues; 
+  },
+
+  getInProgress: async (serviceId) => {
+    const queues = Queue.findAll({
+      where: {
+        service_id: serviceId,
+        status: 'IN_PROGRESS'
+      }
+    });
+
+    return (queues)? queues: 0;
   }
 };
