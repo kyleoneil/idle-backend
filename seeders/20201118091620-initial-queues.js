@@ -5,8 +5,7 @@ module.exports = {
     const queueService = require('./../services/queue.service');
     await queueService.createQueue({
       user_id: 4,     //UID for Customer TestData
-      service_id: 2,
-      teller_id: 3,
+      service_id: 2
     })
   },
 
