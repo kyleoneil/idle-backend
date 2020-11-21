@@ -22,12 +22,12 @@ module.exports = {
         allowNull: false
       },
       last_in_queue: {
-        type: Sequelize.TEXT,
+        type: Sequelize.BIGINT,
         allowNull: false,
         defaultValue: 0
       },
       current_queue: {
-        type: Sequelize.TEXT,
+        type: Sequelize.BIGINT,
         allowNull: false,
         defaultValue: 0
       },
