@@ -14,7 +14,7 @@ app.use('/', express_jwt({
       /\/health/,
       /\/auth\/login$/,
       {
-        url: /\/user$/, // Exclude POST /user or user registration
+        url: /\/users$/, // Exclude POST /users or user registration
         methods: 'POST'
       },
     ]
