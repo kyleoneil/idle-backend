@@ -52,7 +52,7 @@ module.exports = {
     const total_queue_records = await User.count();
     const userPaginated = await User.findAll({ 
       offset: pageOffset, 
-      limit: 10, 
+      limit: resultsPerPage,
       attributes: { exclude: ['password'] }
     })
     return {
