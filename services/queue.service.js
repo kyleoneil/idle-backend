@@ -36,5 +36,15 @@ module.exports = {
     });
 
     return (queues)? queues: 0;
+  },
+
+  updateQueue: async (serviceId) => {
+    const service = await Service.findOne({ where: {id: serviceId} });
+    service.last_in_queue++;
+    await Service.update(
+      {last_in_queue: service.last_in_queue},
+      {where: {id: service.id}}
+    )
+    return service;
   }
 };

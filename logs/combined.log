@@ -1,0 +1,238 @@
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:21:40.054Z"}
+{"message":"App exited gracefully","level":"info","timestamp":"2020-11-19T03:21:47.492Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:21:57.043Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:22:56.041Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:25:23.116Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:25:23.126Z"}
+{"message":"POST /api/users/create 401 149.352 ms - 46","level":"info","timestamp":"2020-11-19T03:25:23.169Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:26:06.153Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:26:06.487Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:26:06.489Z"}
+{"message":"POST /api/users/ 401 54.280 ms - 46","level":"info","timestamp":"2020-11-19T03:26:06.509Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:26:21.919Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:26:21.921Z"}
+{"message":"POST /api/users/ 401 8.601 ms - 46","level":"info","timestamp":"2020-11-19T03:26:21.924Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:27:18.651Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:27:18.655Z"}
+{"message":"POST /api/users/ 401 14.365 ms - 46","level":"info","timestamp":"2020-11-19T03:27:18.662Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:27:50.205Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:27:50.428Z"}
+{"message":"POST /api/users/ 401 293.768 ms - 46","level":"info","timestamp":"2020-11-19T03:27:50.496Z"}
+{"message":"{\"message\":\"No authorization token was found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:30:15.458Z"}
+{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"},"level":"error","timestamp":"2020-11-19T03:30:15.462Z"}
+{"message":"POST /api/users/ 401 13.762 ms - 46","level":"info","timestamp":"2020-11-19T03:30:15.469Z"}
+{"message":"{\"message\":\"User with email and password not found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:47:08.809Z"}
+{"name":"","status":401,"level":"error","message":"undefined","timestamp":"2020-11-19T03:47:08.818Z"}
+{"message":"POST /api/auth/login 401 119.363 ms - 52","level":"info","timestamp":"2020-11-19T03:47:08.827Z"}
+{"message":"{\"message\":\"User with email and password not found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:47:44.164Z"}
+{"name":"","status":401,"level":"error","message":"undefined","timestamp":"2020-11-19T03:47:44.167Z"}
+{"message":"POST /api/auth/login 401 36.354 ms - 52","level":"info","timestamp":"2020-11-19T03:47:44.171Z"}
+{"message":"App exited gracefully","level":"info","timestamp":"2020-11-19T03:47:54.424Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:48:02.944Z"}
+{"message":"{\"message\":\"User with email and password not found\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:48:11.647Z"}
+{"name":"","status":401,"level":"error","message":"undefined","timestamp":"2020-11-19T03:48:11.652Z"}
+{"message":"POST /api/auth/login 401 224.131 ms - 52","level":"info","timestamp":"2020-11-19T03:48:11.681Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:49:46.234Z"}
+{"message":"POST /api/auth/login 200 314.116 ms - 313","level":"info","timestamp":"2020-11-19T03:49:53.758Z"}
+{"message":"{\"message\":\"Format is Authorization: Bearer [token]\",\"statusCode\":401}","level":"error","timestamp":"2020-11-19T03:54:03.242Z"}
+{"name":"UnauthorizedError","message":"Format is Authorization: Bearer [token]","code":"credentials_bad_format","status":401,"inner":{"message":"Format is Authorization: Bearer [token]"},"level":"error","timestamp":"2020-11-19T03:54:03.251Z"}
+{"message":"POST /api/users/ 401 34.654 ms - 53","level":"info","timestamp":"2020-11-19T03:54:03.267Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-19T03:54:37.227Z"}
+{"message":"{\"message\":\"Cannot read property 'id' of null\",\"statusCode\":500}","level":"error","timestamp":"2020-11-19T03:54:37.231Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-19T03:54:37.235Z"}
+{"message":"POST /api/users/ 500 92.714 ms - 47","level":"info","timestamp":"2020-11-19T03:54:37.242Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:57:53.619Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-19T03:57:56.985Z"}
+{"message":"{\"message\":\"Cannot read property 'id' of null\",\"statusCode\":500}","level":"error","timestamp":"2020-11-19T03:57:56.987Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-19T03:57:56.990Z"}
+{"message":"POST /api/users/create 500 234.271 ms - 47","level":"info","timestamp":"2020-11-19T03:57:57.017Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T03:59:49.193Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:00:04.902Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:00:35.550Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:00:36.764Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:00:54.370Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:03:15.383Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:03:22.279Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:03:56.322Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:04:16.558Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:05:05.130Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:06:50.469Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:06:56.501Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:07:19.027Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:07:40.189Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:07:55.554Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:24.209Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:29.305Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:39.792Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:51.456Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:08:58.314Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:09:02.618Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:10:33.180Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:10:47.470Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:10:56.345Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:11:05.367Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:11:11.809Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:11:38.977Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:12:00.554Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:12:36.104Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:12:50.072Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-19T04:23:14.748Z"}
+{"message":"App exited gracefully","level":"info","timestamp":"2020-11-19T04:25:26.644Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:50:48.948Z"}
+{"name":"SequelizeDatabaseError","parent":{"fatal":false,"errno":1054,"sqlState":"42S22","code":"ER_BAD_FIELD_ERROR","sql":"SELECT `User`.`id`, `User`.`email`, `User`.`password`, `User`.`name`, `User`.`birthdate`, `User`.`token`, `User`.`last_login` AS `lastLogin`, `User`.`created_at` AS `createdAt`, `User`.`updated_at` AS `updatedAt`, `User`.`role_id` AS `RoleId`, `Role`.`id` AS `Role.id`, `Role`.`name` AS `Role.name`, `Role`.`active` AS `Role.active`, `Role`.`created_at` AS `Role.createdAt`, `Role`.`updated_at` AS `Role.updatedAt` FROM `users` AS `User` LEFT OUTER JOIN `roles` AS `Role` ON `User`.`role_id` = `Role`.`id` WHERE `User`.`email` = 'admin@idle.com';"},"original":{"fatal":false,"errno":1054,"sqlState":"42S22","code":"ER_BAD_FIELD_ERROR","sql":"SELECT `User`.`id`, `User`.`email`, `User`.`password`, `User`.`name`, `User`.`birthdate`, `User`.`token`, `User`.`last_login` AS `lastLogin`, `User`.`created_at` AS `createdAt`, `User`.`updated_at` AS `updatedAt`, `User`.`role_id` AS `RoleId`, `Role`.`id` AS `Role.id`, `Role`.`name` AS `Role.name`, `Role`.`active` AS `Role.active`, `Role`.`created_at` AS `Role.createdAt`, `Role`.`updated_at` AS `Role.updatedAt` FROM `users` AS `User` LEFT OUTER JOIN `roles` AS `Role` ON `User`.`role_id` = `Role`.`id` WHERE `User`.`email` = 'admin@idle.com';"},"sql":"SELECT `User`.`id`, `User`.`email`, `User`.`password`, `User`.`name`, `User`.`birthdate`, `User`.`token`, `User`.`last_login` AS `lastLogin`, `User`.`created_at` AS `createdAt`, `User`.`updated_at` AS `updatedAt`, `User`.`role_id` AS `RoleId`, `Role`.`id` AS `Role.id`, `Role`.`name` AS `Role.name`, `Role`.`active` AS `Role.active`, `Role`.`created_at` AS `Role.createdAt`, `Role`.`updated_at` AS `Role.updatedAt` FROM `users` AS `User` LEFT OUTER JOIN `roles` AS `Role` ON `User`.`role_id` = `Role`.`id` WHERE `User`.`email` = 'admin@idle.com';","level":"error","message":"undefined","timestamp":"2020-11-22T11:50:52.148Z"}
+{"message":"{\"message\":\"(conn=368, no: 1054, SQLState: 42S22) Unknown column 'User.birthdate' in 'field list'\\nsql: SELECT `User`.`id`, `User`.`email`, `User`.`password`, `User`.`name`, `User`.`birthdate`, `User`.`token`, `User`.`last_login` AS `lastLogin`, `User`.`created_at` AS `createdAt`, `User`.`updated_at` AS `updatedAt`, `User`.`role_id` AS `RoleId`, `Role`.`id` AS `Role.id`, `Role`.`name` AS `Role.name`, `Role`.`active` AS `Role.active`, `Role`.`created_at` AS `Role.createdAt`, `Role`.`updated_at` AS `Role.updatedAt` FROM `users` AS `User` LEFT OUTER JOIN `roles` AS `Role` ON `User`.`role_id` = `Role`.`id` WHERE `User`.`email` = 'admin@idle.com'; - parameters:[]\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T11:50:52.149Z"}
+{"name":"SequelizeDatabaseError","parent":{"fatal":false,"errno":1054,"sqlState":"42S22","code":"ER_BAD_FIELD_ERROR","sql":"SELECT `User`.`id`, `User`.`email`, `User`.`password`, `User`.`name`, `User`.`birthdate`, `User`.`token`, `User`.`last_login` AS `lastLogin`, `User`.`created_at` AS `createdAt`, `User`.`updated_at` AS `updatedAt`, `User`.`role_id` AS `RoleId`, `Role`.`id` AS `Role.id`, `Role`.`name` AS `Role.name`, `Role`.`active` AS `Role.active`, `Role`.`created_at` AS `Role.createdAt`, `Role`.`updated_at` AS `Role.updatedAt` FROM `users` AS `User` LEFT OUTER JOIN `roles` AS `Role` ON `User`.`role_id` = `Role`.`id` WHERE `User`.`email` = 'admin@idle.com';"},"original":{"fatal":false,"errno":1054,"sqlState":"42S22","code":"ER_BAD_FIELD_ERROR","sql":"SELECT `User`.`id`, `User`.`email`, `User`.`password`, `User`.`name`, `User`.`birthdate`, `User`.`token`, `User`.`last_login` AS `lastLogin`, `User`.`created_at` AS `createdAt`, `User`.`updated_at` AS `updatedAt`, `User`.`role_id` AS `RoleId`, `Role`.`id` AS `Role.id`, `Role`.`name` AS `Role.name`, `Role`.`active` AS `Role.active`, `Role`.`created_at` AS `Role.createdAt`, `Role`.`updated_at` AS `Role.updatedAt` FROM `users` AS `User` LEFT OUTER JOIN `roles` AS `Role` ON `User`.`role_id` = `Role`.`id` WHERE `User`.`email` = 'admin@idle.com';"},"sql":"SELECT `User`.`id`, `User`.`email`, `User`.`password`, `User`.`name`, `User`.`birthdate`, `User`.`token`, `User`.`last_login` AS `lastLogin`, `User`.`created_at` AS `createdAt`, `User`.`updated_at` AS `updatedAt`, `User`.`role_id` AS `RoleId`, `Role`.`id` AS `Role.id`, `Role`.`name` AS `Role.name`, `Role`.`active` AS `Role.active`, `Role`.`created_at` AS `Role.createdAt`, `Role`.`updated_at` AS `Role.updatedAt` FROM `users` AS `User` LEFT OUTER JOIN `roles` AS `Role` ON `User`.`role_id` = `Role`.`id` WHERE `User`.`email` = 'admin@idle.com';","level":"error","message":"undefined","timestamp":"2020-11-22T11:50:52.150Z"}
+{"message":"POST /api/auth/login 500 28.324 ms - 668","level":"info","timestamp":"2020-11-22T11:50:52.154Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:51:12.079Z"}
+{"message":"POST /api/auth/login 200 46.939 ms - 331","level":"info","timestamp":"2020-11-22T11:51:13.726Z"}
+{"message":"{\"message\":\"jwt expired\",\"statusCode\":401}","level":"error","timestamp":"2020-11-22T11:51:23.971Z"}
+{"name":"UnauthorizedError","message":"jwt expired","code":"invalid_token","status":401,"inner":{"name":"TokenExpiredError","message":"jwt expired","expiredAt":"2020-11-22T10:08:16.000Z"},"level":"error","timestamp":"2020-11-22T11:51:23.972Z"}
+{"message":"POST /api/queues 401 7.276 ms - 25","level":"info","timestamp":"2020-11-22T11:51:23.974Z"}
+{"status":404,"level":"error","message":"undefined","timestamp":"2020-11-22T11:51:26.899Z"}
+{"message":"{\"message\":\"API does not exist.\",\"statusCode\":404}","level":"error","timestamp":"2020-11-22T11:51:26.900Z"}
+{"status":404,"level":"error","message":"undefined","timestamp":"2020-11-22T11:51:26.900Z"}
+{"message":"POST /api/queues 404 9.941 ms - 33","level":"info","timestamp":"2020-11-22T11:51:26.902Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:52:08.303Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:52:10.497Z"}
+{"message":"{\"message\":\"Services.updateQueue is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T11:52:10.497Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:52:10.498Z"}
+{"message":"POST /api/queues 500 49.312 ms - 52","level":"info","timestamp":"2020-11-22T11:52:10.506Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:54:04.823Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:54:07.311Z"}
+{"message":"{\"message\":\"Services.updateQueue is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T11:54:07.311Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:54:07.312Z"}
+{"message":"POST /api/queues 500 42.863 ms - 52","level":"info","timestamp":"2020-11-22T11:54:07.316Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:55:01.047Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:55:04.078Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:55:06.109Z"}
+{"message":"{\"message\":\"Services is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T11:55:06.110Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:55:06.110Z"}
+{"message":"POST /api/queues 500 39.295 ms - 40","level":"info","timestamp":"2020-11-22T11:55:06.113Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:55:20.796Z"}
+{"message":"POST /api/queues 200 76.297 ms - 34","level":"info","timestamp":"2020-11-22T11:55:21.880Z"}
+{"message":"POST /api/queues 200 24.191 ms - 34","level":"info","timestamp":"2020-11-22T11:55:46.628Z"}
+{"message":"POST /api/queues 200 23.396 ms - 34","level":"info","timestamp":"2020-11-22T11:57:07.360Z"}
+{"status":404,"level":"error","message":"undefined","timestamp":"2020-11-22T11:57:20.011Z"}
+{"message":"{\"message\":\"API does not exist.\",\"statusCode\":404}","level":"error","timestamp":"2020-11-22T11:57:20.011Z"}
+{"status":404,"level":"error","message":"undefined","timestamp":"2020-11-22T11:57:20.012Z"}
+{"message":"GET /api/services/2/queues 404 8.196 ms - 33","level":"info","timestamp":"2020-11-22T11:57:20.014Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:57:35.527Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:57:50.490Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:58:04.080Z"}
+{"message":"GET /api/services/2/queues 200 34.459 ms - 506","level":"info","timestamp":"2020-11-22T11:58:06.431Z"}
+{"message":"{\"message\":\"jwt expired\",\"statusCode\":401}","level":"error","timestamp":"2020-11-22T11:58:13.131Z"}
+{"name":"UnauthorizedError","message":"jwt expired","code":"invalid_token","status":401,"inner":{"name":"TokenExpiredError","message":"jwt expired","expiredAt":"2020-11-22T10:11:20.000Z"},"level":"error","timestamp":"2020-11-22T11:58:13.132Z"}
+{"message":"GET /api/services/2 401 6.239 ms - 25","level":"info","timestamp":"2020-11-22T11:58:13.136Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:58:22.136Z"}
+{"message":"{\"message\":\"branchService.findById is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T11:58:22.137Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:58:22.138Z"}
+{"message":"GET /api/services/2 500 13.142 ms - 54","level":"info","timestamp":"2020-11-22T11:58:22.140Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:58:42.808Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:58:48.408Z"}
+{"message":"GET /api/services/2 200 24.958 ms - 136","level":"info","timestamp":"2020-11-22T11:58:50.103Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:59:05.043Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:59:21.566Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:59:24.999Z"}
+{"message":"{\"message\":\"Services.getServiceQueue is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T11:59:25.000Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:59:25.000Z"}
+{"message":"GET /api/services/2/queues 500 19.048 ms - 56","level":"info","timestamp":"2020-11-22T11:59:25.007Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T11:59:36.575Z"}
+{"message":"GET /api/services/2/queues 200 47.249 ms - 506","level":"info","timestamp":"2020-11-22T11:59:38.126Z"}
+{"message":"{\"message\":\"jwt expired\",\"statusCode\":401}","level":"error","timestamp":"2020-11-22T11:59:41.104Z"}
+{"name":"UnauthorizedError","message":"jwt expired","code":"invalid_token","status":401,"inner":{"name":"TokenExpiredError","message":"jwt expired","expiredAt":"2020-11-19T04:07:38.000Z"},"level":"error","timestamp":"2020-11-22T11:59:41.105Z"}
+{"message":"POST /api/auth/logout 401 3.255 ms - 25","level":"info","timestamp":"2020-11-22T11:59:41.106Z"}
+{"message":"POST /api/auth/logout 200 15.011 ms - 32","level":"info","timestamp":"2020-11-22T11:59:47.200Z"}
+{"message":"POST /api/auth/login 200 29.651 ms - 331","level":"info","timestamp":"2020-11-22T11:59:49.208Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:59:57.619Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T11:59:57.620Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T11:59:57.621Z"}
+{"message":"POST /api/queues 500 6.635 ms - 52","level":"info","timestamp":"2020-11-22T11:59:57.623Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:00:09.873Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:00:11.105Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:00:11.105Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:00:11.105Z"}
+{"message":"POST /api/queues 500 29.198 ms - 52","level":"info","timestamp":"2020-11-22T12:00:11.111Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:00:20.627Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:00:22.679Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:00:22.680Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:00:22.680Z"}
+{"message":"POST /api/queues 500 31.219 ms - 52","level":"info","timestamp":"2020-11-22T12:00:22.686Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:00:33.961Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:00:35.148Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:00:35.148Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:00:35.149Z"}
+{"message":"POST /api/queues 500 30.310 ms - 52","level":"info","timestamp":"2020-11-22T12:00:35.154Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:00:44.011Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:00:45.115Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:00:45.116Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:00:45.116Z"}
+{"message":"POST /api/queues 500 32.237 ms - 52","level":"info","timestamp":"2020-11-22T12:00:45.123Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:00:59.616Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:01:01.060Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:01:01.061Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:01:01.061Z"}
+{"message":"POST /api/queues 500 32.647 ms - 52","level":"info","timestamp":"2020-11-22T12:01:01.068Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:01:09.195Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:01:10.613Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:01:10.613Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:01:10.614Z"}
+{"message":"POST /api/queues 500 30.615 ms - 52","level":"info","timestamp":"2020-11-22T12:01:10.620Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:01:20.242Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:01:21.166Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:01:21.166Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:01:21.167Z"}
+{"message":"POST /api/queues 500 30.569 ms - 52","level":"info","timestamp":"2020-11-22T12:01:21.172Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:01:39.572Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:01:41.015Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:01:41.015Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:01:41.016Z"}
+{"message":"POST /api/queues 500 31.763 ms - 52","level":"info","timestamp":"2020-11-22T12:01:41.021Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:02:41.729Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:02:41.730Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:02:41.730Z"}
+{"message":"POST /api/queues 500 10.282 ms - 52","level":"info","timestamp":"2020-11-22T12:02:41.733Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:02:53.572Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:02:54.789Z"}
+{"message":"{\"message\":\"Services.findService is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:02:54.789Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:02:54.789Z"}
+{"message":"POST /api/queues 500 24.032 ms - 52","level":"info","timestamp":"2020-11-22T12:02:54.796Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:03:15.353Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:03:19.770Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:03:21.565Z"}
+{"message":"POST /api/queues 200 45.393 ms - 34","level":"info","timestamp":"2020-11-22T12:03:29.139Z"}
+{"message":"GET /api/services/2/queues 403 3.965 ms - 62","level":"info","timestamp":"2020-11-22T12:03:32.985Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:03:40.583Z"}
+{"message":"{\"message\":\"Services.getServiceQueue is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:03:40.584Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:03:40.584Z"}
+{"message":"GET /api/services/2/queues 500 4.757 ms - 56","level":"info","timestamp":"2020-11-22T12:03:40.585Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:03:57.287Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:03:58.677Z"}
+{"message":"{\"message\":\"Queue is not defined\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:03:58.677Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:03:58.677Z"}
+{"message":"GET /api/services/2/queues 500 17.645 ms - 34","level":"info","timestamp":"2020-11-22T12:03:58.681Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:04:42.627Z"}
+{"message":"{\"message\":\"Queue is not defined\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:04:42.628Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:04:42.628Z"}
+{"message":"GET /api/services/2/queues 500 23.622 ms - 34","level":"info","timestamp":"2020-11-22T12:04:42.629Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:04:52.451Z"}
+{"message":"{\"message\":\"Queue is not defined\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:04:52.451Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:04:52.453Z"}
+{"message":"GET /api/services/2/queues 500 4.871 ms - 34","level":"info","timestamp":"2020-11-22T12:04:52.454Z"}
+{"message":"GET /api/services/2 403 4.750 ms - 62","level":"info","timestamp":"2020-11-22T12:05:08.908Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:05:15.297Z"}
+{"message":"{\"message\":\"Services.getServiceDetails is not a function\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:05:15.297Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:05:15.298Z"}
+{"message":"GET /api/services/2 500 7.225 ms - 58","level":"info","timestamp":"2020-11-22T12:05:15.299Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:05:30.790Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:05:32.395Z"}
+{"message":"{\"message\":\"businessService is not defined\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:05:32.395Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:05:32.396Z"}
+{"message":"GET /api/services/2 500 18.947 ms - 44","level":"info","timestamp":"2020-11-22T12:05:32.399Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:05:51.172Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:05:52.306Z"}
+{"message":"{\"message\":\"queueService is not defined\",\"statusCode\":500}","level":"error","timestamp":"2020-11-22T12:05:52.306Z"}
+{"level":"error","message":"undefined","timestamp":"2020-11-22T12:05:52.308Z"}
+{"message":"GET /api/services/2 500 22.146 ms - 41","level":"info","timestamp":"2020-11-22T12:05:52.311Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:06:02.494Z"}
+{"message":"GET /api/services/2 200 22.255 ms - 136","level":"info","timestamp":"2020-11-22T12:06:05.040Z"}
+{"message":"App started at port 3000 with api root /api.","level":"info","timestamp":"2020-11-22T12:15:30.349Z"}
