@@ -33,7 +33,7 @@ module.exports = {
 
         const branch = {branch_details: data, business_details: business};
         return branch;
-    },
+    }, 
     
     findBranches: async (pageNo, resultsPerPage) => {
         const pageOffset = resultsPerPage * (pageNo - 1);
