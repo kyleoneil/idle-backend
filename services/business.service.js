@@ -1,5 +1,6 @@
 const {Business} = require('./../models');
 
 module.exports = {
-  findBusiness: (name) => Business.findOne({where: {name}})
+  findBusinessByName: (name) => Business.findOne({where: {name}}),
+  findBusinessById: (id) => Business.findOne({where: {id}})
 }

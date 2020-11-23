@@ -17,7 +17,8 @@ module.exports = {
     data.customer_id = body.user_id;
     data.service_id = body.service_id;
     data.queue_number = service.last_in_queue + 1;
-    Services.updateQueue(serviceId);
+    data.status = 1;
+    const update = await Services.updateQueue(serviceId);
     const queue = await Queue.create(data);
     return queue.id;
   },
@@ -36,5 +37,15 @@ module.exports = {
     });
 
     return (queues)? queues: 0;
+  },
+  updQueueStatus: async (data) => {
+    const queue = await Queue.findOne({
+      where: {id: data.queue_id},
+    });
+    const complete = await Queue.update(
+      {status: data.queue_status,}, 
+     { where: {id: queue.id}}
+    );
+    return complete;
   }
 };
