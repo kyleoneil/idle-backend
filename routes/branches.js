@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
    })
 })
 
-router.get('/', (req, res) => {
+router.get('/', (req, res) => { 
     let {pageNo, resultsPerPage} = req.query;
       let pgNum = (pageNo) ? pageNo : 1;
       let pgRes = (resultsPerPage) ? resultsPerPage : 10;
