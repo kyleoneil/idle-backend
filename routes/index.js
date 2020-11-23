@@ -41,6 +41,8 @@ app.use('/', express_jwt({
 app.use('/auth', require('./auth'));
 app.use('/health', require('./health'));
 app.use('/users', require('./users'));
+app.use('/queue', require('./queues'));
+app.use('/service', require('./service'));
 // app.use('/services', require('./services/services.router'));
 
 module.exports = app;
