@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
             res.json(business);
         }
     }).catch(errorHandler.handleError(res))
-});
+})
 
 router.patch('/:id', (req, res) => {
     /**

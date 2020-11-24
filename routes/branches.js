@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
    })
 })
 
-router.get('/', (req, res) => { 
+router.get('/', (req, res) => {
     let {pageNo, resultsPerPage} = req.query;
       let pgNum = (pageNo) ? pageNo : 1;
       let pgRes = (resultsPerPage) ? resultsPerPage : 10;
@@ -47,19 +47,31 @@ router.get('/:id', (req, res) => {
 
 router.patch('/:id', (req, res) => {
     /**
-   * @type {{branchname:string, businessname:string}}
+   * @type {{branchname:string, businessId:string}}
    */
     const body = req.body;
     if (!body.branchname) {
         res.status(400).json({message: "Please enter a branch name."})
     }
 
-    return businessService.findBusinessByName(body.businessname).then((exists) => {
+    return businessService.findBusinessById(body.businessId).then((exists) => {
         if (!exists) {
             res.status(400).json({message: "Business does not exist."});
         } else {
             branchService.updateBranch(req.params.id, body)
                 .then((branch) => res.json({id: branch.id, message: "Branch has been updated."}))
+                .catch(errorHandler.handleError(res));
+        }
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    return branchService.findById(req.params.id).then((exists) => {
+        if (!exists) {
+            res.status(400).json({message: "Error: Branch not found"})
+        } else {
+            branchService.deleteBranch(req.params.id)
+                .then(() => res.json({message: "Branch deleted successfully."}))
                 .catch(errorHandler.handleError(res));
         }
     })

@@ -1,4 +1,5 @@
-const {Business} = require('./../models');
+const {Business, Branch, Service, Queue} = require('./../models');
+const branchService = require('./branch.service');
 
 module.exports = {
   //CREATE Operations
@@ -18,7 +19,11 @@ module.exports = {
     const total_queue_records = await Business.count();
     const businessPaginate = await Business.findAll({
       offset: pageOffset,
-      limit: resultsPerPage
+      limit: resultsPerPage,
+      attributes: {
+        include: [['id', 'branch_id']],
+        exclude: ['BusinessId', 'id']
+      }
     })
 
     return {
@@ -28,7 +33,11 @@ module.exports = {
   },
 
   //UPDATE Operations
+  
   updateBusiness: async (id, data) => {
+  /**
+   * @type {{businessname:string}}
+   */
     const newName = data;
     const business = await Business.findOne({where: {id}});
 
@@ -38,12 +47,22 @@ module.exports = {
     return business;
   },
 
-  //DELETE Operations
+  //DELETE Operations (In-Progress)
   deleteBusiness: async (id) => {
-    const business = await Business.findOne({where: {id}});
-
-    await business.destroy();
-
+    await Business.destroy({where: {id}}).then(async () => {
+        return await Branch.findAll({where: {BusinessId:id}})
+      }).then(async (branch) => {
+        const services = await Service.findAll({where: {BranchId: branch.id}});
+        await branch.destroy();
+        return services;
+      }).then(async (service) => {
+        const queues = await Queue.findAll({where: {ServiceId: service.id}});
+        await service.destroy();
+        return queues;
+      }).then(async (queue) => {
+        await queue.destroy();
+        return;
+      })
     return;
   }
 }

@@ -1,4 +1,4 @@
-const {Branch, Business} = require('./../models');
+const {Branch, Business, Service, Queue} = require('./../models');
 const businessService = require('./business.service');
 const { static } = require('express');
 
@@ -11,7 +11,7 @@ module.exports = {
     //CREATE Operations
     createBranch: async (body) => {
         const businessname = body.businessname;
-        const business = await businessService.findBusinessByName(businessname);
+        const business = await Business.findOne({where: {name: businessname}});
         const data = {BusinessId: business.id, ...body};
         data.name = body.branchname;
         const branch = await Branch.create(data);
@@ -21,7 +21,7 @@ module.exports = {
     //READ Operations
     findByName: async (name) => {
         const data = await Branch.findOne({where: {name}});
-        const business = await businessService.findBusinessById(data.BusinessId);
+        const business = await Business.findOne({where: {id:data.BusinessId}});
 
         const branch = {branch_details: data, business_details: business};
         return branch;
@@ -33,7 +33,7 @@ module.exports = {
 
         const branch = {branch_details: data, business_details: business};
         return branch;
-    }, 
+    },
     
     findBranches: async (pageNo, resultsPerPage) => {
         const pageOffset = resultsPerPage * (pageNo - 1);
@@ -60,17 +60,33 @@ module.exports = {
         }
     },
 
-    //UPDATE Operations (need assistance here...)
+    //UPDATE Operations
+    
+  
     updateBranch: async(id, body) => {
+    /**
+     * @type {{branchname:string, businessId:bigint}}
+     */
         const brName = body.branchname;
-        const bsName = body.businessname;
+        const bsId = body.businessId;
         const branch = await Branch.findOne({where: {id}});
 
-        console.log(branch);
         branch.name = brName;
-        branch.BusinessId = await businessService.findBusinessByName(bsName);
+        branch.BusinessId = bsId;
 
         await branch.save();
         return branch;
+    },
+
+    //DELETE Operations (In-Progress)
+    deleteBranch: async (id) => {
+        const branch = await Branch.findOne({where: {id}});
+        const services = await Service.findAll({where: {BranchId: branch.id}});
+        const queues = await Queue.findAll({where: {ServiceId: services.id}});
+
+        await queues.destroy();
+        await services.destroy();
+        await branch.destroy();
+        return;
     }
 }

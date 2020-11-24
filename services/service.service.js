@@ -9,20 +9,55 @@ module.exports = {
    *
    * @param {{servicename:string, branchname:string}} body
    */
+
+  //CREATE Operations 
   createService: async (body) => {
     const branchname = body.branchname;
     const branch = await branchService.findByName(branchname);
-    const data = {BranchId: branch.id, ...body};
+    const data = {BranchId: branch.branch_details.id, ...body};
     data.name = body.servicename;
     const service = await Service.create(data);
     return service.id;
   },
+
+  //READ Operations
   findService: async (serviceId) => {
-    const service = await Service.findOne({
-      where: {id: serviceId}
-    });
+    const service = await Service.findOne({where: {id: serviceId}});
     return service;
   },
+
+  getServices: async (pageNo, resultsPerPage) => {
+    const pageOffset = resultsPerPage * (pageNo - 1);
+    const total_queue_records = await Service.count();
+    const servicePaginate = await Service.findAll({
+      offset: pageOffset,
+      limit: resultsPerPage,
+      attributes: {
+        include: [['id', 'service_id']],
+        exclude: ['id', 'name', 'BranchId', 'createdAt', 'updatedAt']
+      },
+      include: [{
+        model: Branch,
+        attributes: {
+          include: [['name', 'branch_name']],
+          exclude: ['name', 'BusinessId', 'id', 'createdAt', 'updatedAt']
+        },
+        include: [{
+          model: Business,
+          attributes: {
+            include: [['name', 'business_name']],
+            exclude: ['name', 'id', 'createdAt', 'updatedAt']
+          }
+        }]
+      }]
+    })
+
+    return {
+      totalRecords: total_queue_records,
+      data: servicePaginate
+    }
+  },
+
   queueService: async(body)=>{
     let verify = await Service.findOne({
       where: {id: body.serviceId}
@@ -75,8 +110,8 @@ module.exports = {
   },
 
   getServiceDetails: async (serviceId) => {
-    const service = await Service.findOne({ where: {id: serviceId} });
-    const branch = await branchService.findById(service.BranchId);
+    const service = await Service.findOne({where:{id: serviceId}});
+    const branch = await Branch.findOne({where: {id: service.BranchId}});
     const business = await businessService.findBusinessById(branch.BusinessId);
 
     const data = {
@@ -90,6 +125,34 @@ module.exports = {
     return data;
   },
 
+  //UPDATE Operations
+  
+
+  updateService: async (id, body) => {
+  /**
+   * @type {{servicename:string, branchId:bigint}}
+   */
+    const servName = body.servicename;
+    const brId = body.branchId;
+    const service = await Service.findOne({where: {id}});
+
+    service.name = servName;
+    service.BranchId = brId;
+
+    await service.save();
+    return service;
+  },
+
+  resetQueue: async (id) => {
+    const service = await Service.findOne({where: {id}});
+    service.last_in_queue = 0;
+    service.current_queue = 0;
+    const delQueue = await Queue.findAll({where: {service_id: id}});
+    await delQueue.destroy();
+    await service.save();
+    return service;
+  },
+
   updateQueue: async (serviceId) => {
     const service = await Service.findOne({ where: {id: serviceId} });
     service.last_in_queue++;
@@ -98,5 +161,14 @@ module.exports = {
       {where: {id: service.id}}
     )
     return service;
+  },
+ 
+  //DELETE Operations (In-Progress)
+  deleteService: async (id) => {
+    const service = await Service.findOne({where: {id}});
+      const queues = await Queue.findAll({where: {ServiceId: service.id}});
+
+      await queues.destroy();
+      await services.destroy();
   }
 };

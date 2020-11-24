@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const appConfig = require('./../config/config');
@@ -39,7 +40,8 @@ app.use('/', express_jwt({
 });
 
 app.use('/auth', require('./auth'));
-app.use('/health', require('./health'));
+app.use('/businesses', require('./businesses'));
+app.use('/branches', require('./branches'));
 app.use('/users', require('./users'));
 app.use('/queues', require('./queues'));
 app.use('/services', require('./services'));

@@ -3,7 +3,7 @@ const dateUtil = require('./../utils/dateUtil');
 const userService = require('./../services/user.service');
 const errorHandler = require('./errorHandler');
 
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
   /**
    * @type {{firstname:string, lastname:string, birthdate:string, email:string,password:string}}
    */
@@ -21,7 +21,7 @@ router.post('/create', (req, res) => {
   // You cannot use await here. See https://javascript.info/async-await#await
   return userService.userExists(body.email).then((exists) => {
     if (exists) {
-      res.status(400).json({message: "User already exits"});
+      res.status(400).json({message: "User already exists"});
     } else {
       userService.create(body)
         .then((user) => res.json({id: user.id, message: "User successfully created."}))
@@ -39,14 +39,16 @@ router.get('/:id', (req, res) => {
 
 router.get('/', (req, res) => {
   let {pageNo, resultsPerPage} = req.query;
-  return userService.findPaginated(pageNo, resultsPerPage)
+  let pgNum = (pageNo) ? pageNo : 1;
+  let pgRes = (resultsPerPage) ? resultsPerPage : 10;
+  return userService.findPaginated(pgNum, pgRes)
     .then((results) => res.json(results))
     .catch(errorHandler.handleError(res));
 });
 
 router.post('/', (req, res) => {
   /**
-   * @type {{firstname:string, lastname:string, birthdate:string, email:string,password:string}}
+   * @type {{firstname:string, lastname:string, birthdate:string, email:string, password:string}}
    */
 });
 
