@@ -77,4 +77,10 @@ router.patch('/:id', (req, res) => {
     })
 })
 
+router.delete('/:id', (req, res) => {
+    return Services.deleteService(req.params.id)
+        .then(() => res.json({message: "Service deleted successfully."}))
+        .catch(errorHandler.handleError(res));
+})
+
 module.exports = router;

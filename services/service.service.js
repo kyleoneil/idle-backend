@@ -165,10 +165,9 @@ module.exports = {
  
   //DELETE Operations (In-Progress)
   deleteService: async (id) => {
-    const service = await Service.findOne({where: {id}});
-      const queues = await Queue.findAll({where: {ServiceId: service.id}});
-
-      await queues.destroy();
-      await services.destroy();
+    await Service.destroy({where: {id}}).then(async () => {
+      await Queue.destroy({where: {ServiceId:id}});
+    })
+    return;
   }
 };

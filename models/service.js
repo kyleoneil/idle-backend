@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Service',
     underscored: true,
     // indexes: [{unique: true, fields: ['branch_id', 'name']}] // TODO: for some reason, it does not work

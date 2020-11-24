@@ -65,15 +65,9 @@ router.patch('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    return businessService.findBusinessById(req.params.id).then((exists) => {
-        if (!exists) {
-            res.status(400).json({message: "Error: Business not found"})
-        } else {
-            businessService.deleteBusiness(req.params.id)
-                .then(() => res.json({message: "Business deleted successfully."}))
-                .catch(errorHandler.handleError(res));
-        }
-    })
+    return businessService.deleteBusiness(req.params.id)
+        .then(() => res.json({message: "Business deleted successfully."}))
+        .catch(errorHandler.handleError(res));
 })
 
 module.exports = router;

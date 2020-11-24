@@ -66,15 +66,9 @@ router.patch('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    return branchService.findById(req.params.id).then((exists) => {
-        if (!exists) {
-            res.status(400).json({message: "Error: Branch not found"})
-        } else {
-            branchService.deleteBranch(req.params.id)
-                .then(() => res.json({message: "Branch deleted successfully."}))
-                .catch(errorHandler.handleError(res));
-        }
-    })
+    return branchService.deleteBranch(req.params.id)
+        .then(() => res.json({message: "Branch deleted successfully."}))
+        .catch(errorHandler.handleError(res));
 })
 
 module.exports = router;

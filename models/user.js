@@ -46,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     lastLogin: DataTypes.DATE,
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'User',
     underscored: true,
   });

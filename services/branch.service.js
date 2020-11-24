@@ -2,6 +2,14 @@ const {Branch, Business, Service, Queue} = require('./../models');
 const businessService = require('./business.service');
 const { static } = require('express');
 
+const getIds = (models) => {
+    var Ids = [];
+    for (x in models) {
+      Ids.push(models[x].id);
+    }
+    return Ids;
+}
+
 module.exports = {
     /**
    *
@@ -29,7 +37,7 @@ module.exports = {
 
     findById: async (id) => {
         const data = await Branch.findOne({where: {id}});
-        const business = await businessService.findBusinessById(data.BusinessId);
+        const business = await Business.findOne({where: {id: data.BusinessId}});
 
         const branch = {branch_details: data, business_details: business};
         return branch;
@@ -80,13 +88,14 @@ module.exports = {
 
     //DELETE Operations (In-Progress)
     deleteBranch: async (id) => {
-        const branch = await Branch.findOne({where: {id}});
-        const services = await Service.findAll({where: {BranchId: branch.id}});
-        const queues = await Queue.findAll({where: {ServiceId: services.id}});
-
-        await queues.destroy();
-        await services.destroy();
-        await branch.destroy();
+        await Branch.destroy({where: {id}}).then(async () => {
+            const serviceIds = getIds(await Service.findAll({where: {BranchId:id}}));
+            await Service.destroy({where: {BranchId:id}});
+            return serviceIds;
+            }).then(async (service) => {
+                const queueIds = getIds(await Queue.findAll({where: {ServiceId:service}}));
+                await Queue.destroy({where: {ServiceId:service}}); //Change to .destroy l8r
+            })
         return;
     }
 }
