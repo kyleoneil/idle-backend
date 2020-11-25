@@ -1,26 +1,24 @@
 const e = require('express');
 const jwt = require('jsonwebtoken');
+const user = require('../models/user');
+const appConfig = require('./../config/config');
+const userService = require('./../services/user.service');
 
 module.exports = {
-    checkToken: (req, res, next) => {
+    checkToken: async (req, res, next) => {
         let token = req.get('authorization');
-        if(token){
-            token = token.slice(7);
-            jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-                if(err){
-                    res.json({
-                        success: 0,
-                        message: "Invalid Bearer-Token"
-                    });
-                }else{
-                    next();
-                }
-            });
+        console.log({
+            user: req.user,
+            token: req.get('authorization')
+        })
+        if(!token){
+            res.status(400).json({message: "Invalid Bearer-Token."});
         }else{
-            res.json({
-                success: 0,
-                message: "Access Denied: Unauthorized User"
-            });
+            await userService.findByEmail(req.user.email)
+                .then((exists) => {
+                    
+                })
+            next();
         }
     }
 }
