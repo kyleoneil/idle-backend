@@ -17,8 +17,8 @@ module.exports = {
       roleName: user.Role.name,
       email,
     }
-    o.token = 'Bearer ' + jwt.sign(o, secretKey, {expiresIn: '1h'}); // TODO: expiry? 
-    user.token = o.token;                                           // TODO Completed
+    o.token = "Bearer " + jwt.sign(o, secretKey, {expiresIn: '4h'}); // TODO: expiry? 
+    user.token = o.token;                                // TODO Completed
     user.lastLogin = new Date();
     await user.save();
     return o;
@@ -27,5 +27,10 @@ module.exports = {
     const user = await userService.findByEmail(email);
     user.token = null;
     return user.save();
+  },
+
+  checkPwd: async (email, rawPass) => {
+    const user = await userService.findByEmail(email, true);
+    return bcrypt.compareSync(rawPass, user.password);
   }
 }

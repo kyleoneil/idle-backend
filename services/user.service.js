@@ -32,6 +32,7 @@ module.exports = {
     const user = await findByEmail(email);
     return !!user; // or user != null
   },
+  
   findById: async (id) => {
     const user = await User.findOne({
       where: {id: id},
