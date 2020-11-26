@@ -1,8 +1,11 @@
+
 const express = require('express');
 const app = express();
 const appConfig = require('./../config/config');
 const express_jwt = require('express-jwt');
 const userService = require('./../services/user.service');
+const auth = require('./../auth/token_validation');
+let token = '';
 
 app.use('/', express_jwt({
   secret: appConfig.secretKey,
@@ -20,9 +23,10 @@ app.use('/', express_jwt({
     ]
   }
 ), function (req, res, next) {
-  let token = req.headers.authorization;
+  token = req.headers.authorization;
   const jwtUser = req.user;
   if (jwtUser && req.path !== '/auth/logout') {
+    
     // req.user is the object signed in jwt.sign. See auth.service.js#login
     userService.findById(jwtUser.id).then((user) => {
       if (!user) {
@@ -30,19 +34,21 @@ app.use('/', express_jwt({
       } else if (!user.token || user.token !== token) {
         res.status(403).json({message: 'Session timeout. Please logout then login again.'});
       } else {
+        console.log({token});
         next();
       }
     })
   } else {
     next();
   }
+  
 });
 
 app.use('/auth', require('./auth'));
-app.use('/health', require('./health'));
-app.use('/users', require('./users'));
-app.use('/queue', require('./queues'));
-app.use('/service', require('./service'));
-// app.use('/services', require('./services/services.router'));
+app.use('/businesses',auth.checkToken, require('./businesses'));
+app.use('/branches', auth.checkToken, require('./branches'));
+app.use('/users', auth.checkToken, require('./users'));
+app.use('/queues', auth.checkToken, require('./queues'));
+app.use('/services', auth.checkToken, require('./services'));
 
 module.exports = app;

@@ -1,3 +1,4 @@
+
 const {User, Role} = require('./../models');
 const bcrypt = require('bcrypt');
 const {saltRounds} = require('./../config/config');
@@ -31,6 +32,7 @@ module.exports = {
     const user = await findByEmail(email);
     return !!user; // or user != null
   },
+  
   findById: async (id) => {
     const user = await User.findOne({
       where: {id: id},
@@ -45,7 +47,7 @@ module.exports = {
    * @param resultsPerPage
    * @returns {Promise<{totalRecords: number, data: [{}]}>}
    */
-  findPaginated: async (pageNo = 1, resultsPerPage = 10) => {
+  findPaginated: async (pageNo, resultsPerPage) => {
     // TODO: Implement this. Note: make sure password is removed prior to return
     // TODO Completed 
     const pageOffset = resultsPerPage * (pageNo - 1);

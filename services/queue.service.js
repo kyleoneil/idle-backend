@@ -1,4 +1,4 @@
-const {Queue} = require('./../models');
+const {Queue, Service} = require('./../models');
 const Services = require('./service.service');
 const userServices = require('./user.service');
 const { static } = require('express');
@@ -11,14 +11,15 @@ module.exports = {
   createQueue: async (body) => {
     const serviceId = body.service_id;
     const userId = body.user_id;
-    const service = await Services.findService(serviceId);
+    const service = await Service.findOne({where: {id: serviceId}});
     const customer = await userServices.findById(userId);
     const data = {UserId: customer.id, ServiceId: service.id};
     data.customer_id = body.user_id;
     data.service_id = body.service_id;
     data.queue_number = service.last_in_queue + 1;
     data.status = 1;
-    const update = await Services.updateQueue(serviceId);
+    service.last_in_queue++;
+    service.save();
     const queue = await Queue.create(data);
     return queue.id;
   },
@@ -38,6 +39,18 @@ module.exports = {
 
     return (queues)? queues: 0;
   },
+
+  // updateQueue: async (serviceId) => {
+  //   const service = await Service.findOne({ where: {id: serviceId} });
+  //   service.last_in_queue++;
+  //   await Service.update(
+  //     {last_in_queue: service.last_in_queue},
+  //     {where: {id: service.id}}
+  //   )
+  //   return service;
+  // },
+
+
   updQueueStatus: async (data) => {
     const queue = await Queue.findOne({
       where: {id: data.queue_id},
