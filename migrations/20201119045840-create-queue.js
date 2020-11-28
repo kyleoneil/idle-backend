@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('queues', {
@@ -7,10 +8,10 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
-      user_id: {
+      customer_id: {
         type: Sequelize.BIGINT,
-        references: {
-          model: {
+        references:{
+          model:{
             tableName: 'users',
           },
           key: 'id'
@@ -19,8 +20,8 @@ module.exports = {
       },
       service_id: {
         type: Sequelize.BIGINT,
-        references: {
-          model: {
+        references:{
+          model:{
             tableName: 'services',
           },
           key: 'id'
@@ -29,36 +30,23 @@ module.exports = {
       },
       teller_id: {
         type: Sequelize.BIGINT,
-        references: {
-          model: {
+        references:{
+          model:{
             tableName: 'users',
           },
           key: 'id'
         },
-        allowNull: true
+        allowNull: false
       },
-      queue_number: {
-        type: Sequelize.BIGINT
+      queue_number:{
+        type: Sequelize.BIGINT,
+        allowNull: false
       },
       status: {
-        type: Sequelize.ENUM({
-          values: ['IN_QUEUE', 'IN_PROGRESS', 'NO_SHOW', 'COMPLETED'],
-        }),
-        defaultValue: 'IN_QUEUE'
-      },
-      created_at: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updated_at: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      deleted_at: {
-        allowNull: true,
-        type: Sequelize.DATE
-      },
-    });
+        type:Sequelize.TEXT,
+        
+      }
+  },
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Queues');

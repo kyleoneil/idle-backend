@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Branch',
     underscored: true,
     // indexes: [{unique: true, fields: ['business_id', 'name']}]
