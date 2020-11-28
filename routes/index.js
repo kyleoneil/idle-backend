@@ -44,10 +44,10 @@ app.use('/', express_jwt({
 });
 
 app.use('/auth', require('./auth'));
-app.use('/businesses',auth.checkToken, require('./businesses'));
-app.use('/branches', auth.checkToken, require('./branches'));
-app.use('/users', auth.checkToken, require('./users'));
-app.use('/queues', auth.checkToken, require('./queues'));
-app.use('/services', auth.checkToken, require('./services'));
+app.use('/businesses', require('./businesses'));
+app.use('/branches', require('./branches'));
+app.use('/users', require('./users'));
+app.use('/queues', require('./queues'));
+app.use('/services', require('./services'));
 
 module.exports = app;
