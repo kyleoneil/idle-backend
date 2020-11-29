@@ -33,7 +33,7 @@ module.exports = {
       offset: pageOffset,
       limit: resultsPerPage,
       attributes: {
-        include: [['id', 'service_id']],
+        include: [['name', 'service_name']],
         exclude: ['id', 'name', 'BranchId', 'createdAt', 'updatedAt']
       },
       include: [{
