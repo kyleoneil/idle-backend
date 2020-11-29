@@ -50,15 +50,24 @@ module.exports = {
   //   return service;
   // },
 
-
-  updQueueStatus: async (data) => {
-    const queue = await Queue.findOne({
-      where: {id: data.queue_id},
-    });
-    const complete = await Queue.update(
-      {status: data.queue_status,}, 
-     { where: {id: queue.id}}
-    );
-    return complete;
+  update: async (id, data) => {
+    const {user_id, service_id, teller_id, queue_number, status} = data;
+    const queue = await Queue.findOne({where: {id}});
+    if (user_id) {
+      queue.user_id = user_id;
+    }
+    if (service_id) {
+      queue.service_id = service_id;
+    }
+    if (teller_id) {
+      queue.service_id = teller_id;
+    }
+    if (queue_number) {
+      queue.queue_number = queue_number;
+    }
+    if (status) {
+      queue.status = status;
+    }
+    return await queue.save();
   }
 };

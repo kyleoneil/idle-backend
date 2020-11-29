@@ -42,17 +42,12 @@ router.post('/', (req, res) => {
         });
 });
 
-router.patch('/queuestatus', (req, res) => {
+router.patch('/:id', (req, res) => {
     const body = req.body;
-    // if (   if the caller is not a superadmin basically if the caller is a user   ) {
-    //     res.status(403).json({message: "User is not authorized to mark the queue as completed"});
-    //     return;
-    //   }
-    queueService.updQueueStatus(body)
+    queueService.update(req.params.id, body)
     .then((data) => res.json({data: data, message: "Queue successfully updated."}))
     .catch(errorHandler.handleError(res));
 });
-
 
 router.get('/queuelist', (req, res) => {
   const body = req.body;
