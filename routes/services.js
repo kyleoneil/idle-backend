@@ -28,10 +28,10 @@ router.post('/', (req, res) => {
 })
 
 router.get('/', (req, res) => {
-    let {pageNo, resultsPerPage} = req.query;
+    let {pageNo, resultsPerPage, branchId} = req.query;
     let pgNum = pageNo ? parseInt(pageNo) : 1;
     let pgRes = resultsPerPage ? parseInt(resultsPerPage) : 10;
-    return Services.getServices(pgNum, pgRes)
+    return Services.getServices(pgNum, pgRes, branchId)
         .then((results) => res.json(results))
         .catch(errorHandler.handleError(res))
 })
