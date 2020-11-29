@@ -26,7 +26,6 @@ app.use('/', express_jwt({
   token = req.headers.authorization;
   const jwtUser = req.user;
   if (jwtUser && req.path !== '/auth/logout') {
-    
     // req.user is the object signed in jwt.sign. See auth.service.js#login
     userService.findById(jwtUser.id).then((user) => {
       if (!user) {

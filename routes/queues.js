@@ -26,40 +26,37 @@ const errorHandler = require('./errorHandler');
 // })
 
 router.post('/', (req, res) => {
-    const body = req.body;
-     if ( !body.user_id || !body.service_id) {
-         res.status(400).json({message: "There is no user id or servrice id"});
-         return;
-       }
-       userService.findById(body.user_id).then((exists) => {
-        if (!exists) {
-          res.status(400).json({message: "User doesn't exists"});
-        } else {
-         queueService.createQueue(body)
+  const body = req.body;
+  if (!body.user_id || !body.service_id) {
+    res.status(400).json({message: "There is no user id or servrice id"});
+    return;
+  }
+  userService.findById(body.user_id).then((exists) => {
+    if (!exists) {
+      res.status(400).json({message: "User doesn't exists"});
+    } else {
+      queueService.createQueue(body)
         .then((id) => res.json({id: id, message: "Queue successfully created."}))
         .catch(errorHandler.handleError(res));
-        }
-        });
+    }
+  });
 });
 
 router.patch('/:id', (req, res) => {
-    const body = req.body;
-    queueService.update(req.params.id, body)
+  const body = req.body;
+  queueService.update(req.params.id, body)
     .then((data) => res.json({data: data, message: "Queue successfully updated."}))
     .catch(errorHandler.handleError(res));
 });
 
-router.get('/queuelist', (req, res) => {
-  const body = req.body;
-  // if (   if the caller is not a superadmin basically if the caller is a user   ) {
-  //     res.status(403).json({message: ""});
-  //     return;
-  //   }
-  queueService.getQueues(body.service_id)
-  .then((data) => res.json({data: data, message: "Queue List fetched."}))
-  .catch(errorHandler.handleError(res));
+router.get('/', (req, res) => {
+  let {pageNo, resultsPerPage} = req.query;
+  pageNo = pageNo ? parseInt(pageNo) : 1;
+  resultsPerPage = resultsPerPage ? parseInt(resultsPerPage) : 10;
+  queueService.getQueues(pageNo, resultsPerPage, req.query)
+    .then((data) => res.json(data))
+    .catch(errorHandler.handleError(res));
 });
-
 
 router.get('/currentqueue', (req, res) => {
   const body = req.body;
@@ -68,10 +65,9 @@ router.get('/currentqueue', (req, res) => {
   //     return;
   //   }
   queueService.getInProgress(body.service_id)
-  .then((data) => res.json({data: data, message: "Current Queue List fetched."}))
-  .catch(errorHandler.handleError(res));
+    .then((data) => res.json({data: data, message: "Current Queue List fetched."}))
+    .catch(errorHandler.handleError(res));
 });
-
 
 
 module.exports = router;

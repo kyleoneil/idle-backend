@@ -1,10 +1,10 @@
 const {Queue, Service} = require('./../models');
 const Services = require('./service.service');
 const userServices = require('./user.service');
-const { static } = require('express');
+const {static} = require('express');
 
 module.exports = {
-    /**
+  /**
    *
    * @param {{customer_id:bigint, service_id:bigint}} body
    */
@@ -24,9 +24,25 @@ module.exports = {
     return queue.id;
   },
 
-  getQueues: async (serviceId) => {
-    const queues = Queue.findAll({ where: {service_id: serviceId} });
-    return queues; 
+  getQueues: async (pageNo, resultsPerPage, queries) => {
+    let {user_id, service_id, teller_id, status} = queries;
+    const where = {};
+    if (user_id) {
+      where.service_id = user_id;
+    }
+    if (service_id) {
+      where.service_id = service_id;
+    }
+    if (teller_id) {
+      where.teller_id = teller_id;
+    }
+    if (status) {
+      where.status = status;
+    }
+    return {
+      totalRecords: await Queue.count({where}),
+      data: await Queue.findAll({where})
+    }
   },
 
   getInProgress: async (serviceId) => {
@@ -37,7 +53,7 @@ module.exports = {
       }
     });
 
-    return (queues)? queues: 0;
+    return (queues) ? queues : 0;
   },
 
   // updateQueue: async (serviceId) => {

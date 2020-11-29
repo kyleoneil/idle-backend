@@ -17,7 +17,8 @@ module.exports = {
       roleName: user.Role.name,
       email,
     }
-    o.token = "Bearer " + jwt.sign(o, secretKey, {expiresIn: '4h'}); // TODO: expiry? 
+    o.token = "Bearer " + jwt.sign(o, secretKey, {expiresIn: '4h'}); // TODO: expiry?
+    // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6ImFsbGFuLCBhbGxhbiIsInJvbGVOYW1lIjoiQ1VTVE9NRVIiLCJlbWFpbCI6ImFsbGFuQGlkbGUuY29tIiwiaWF0IjoxNjA2NjUwOTg1LCJleHAiOjE2MDY2NjUzODV9.1QYu7vKTbfoSnOGbxeAxjKfXu_CPF9z6kGnom5FLjpw
     user.token = o.token;                                // TODO Completed
     user.lastLogin = new Date();
     await user.save();
