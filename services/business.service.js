@@ -28,10 +28,6 @@ module.exports = {
     const businessPaginate = await Business.findAll({
       offset: pageOffset,
       limit: resultsPerPage,
-      attributes: {
-        include: [['id', 'branch_id']],
-        exclude: ['BusinessId', 'id']
-      }
     })
 
     return {
