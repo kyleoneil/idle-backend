@@ -38,24 +38,6 @@ module.exports = {
     const servicePaginate = await Service.findAll({
       offset: pageOffset,
       limit: resultsPerPage,
-      attributes: {
-        include: [['name', 'service_name']],
-        exclude: ['name', 'BranchId', 'createdAt', 'updatedAt']
-      },
-      include: [{
-        model: Branch,
-        attributes: {
-          include: [['name', 'branch_name']],
-          exclude: ['name', 'BusinessId', 'id', 'createdAt', 'updatedAt']
-        },
-        include: [{
-          model: Business,
-          attributes: {
-            include: [['name', 'business_name']],
-            exclude: ['name', 'id', 'createdAt', 'updatedAt']
-          }
-        }]
-      }],
       where
     })
 
