@@ -26,9 +26,15 @@ module.exports = {
     return service;
   },
 
-  getServices: async (pageNo, resultsPerPage) => {
+  getServices: async (pageNo, resultsPerPage, branchId) => {
     const pageOffset = resultsPerPage * (pageNo - 1);
-    const total_queue_records = await Service.count();
+
+    const where = {};
+    if(branchId) {
+        where.branch_id = branchId;
+    }
+    const total_queue_records = (branchId) ? await Service.count({where}) : await Service.count();
+
     const servicePaginate = await Service.findAll({
       offset: pageOffset,
       limit: resultsPerPage,
@@ -49,7 +55,8 @@ module.exports = {
             exclude: ['name', 'id', 'createdAt', 'updatedAt']
           }
         }]
-      }]
+      }],
+      where
     })
 
     return {
