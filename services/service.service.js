@@ -40,7 +40,7 @@ module.exports = {
       limit: resultsPerPage,
       attributes: {
         include: [['name', 'service_name']],
-        exclude: ['id', 'name', 'BranchId', 'createdAt', 'updatedAt']
+        exclude: ['name', 'BranchId', 'createdAt', 'updatedAt']
       },
       include: [{
         model: Branch,
