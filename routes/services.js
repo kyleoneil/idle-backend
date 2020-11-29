@@ -2,7 +2,24 @@ const router = require('express').Router();
 const branchService = require('../services/branch.service');
 const businessService = require('../services/business.service');
 const Services = require('../services/service.service');
+const queueService = require('../services/queue.service');
 const errorHandler = require('./errorHandler');
+
+router.post('/:id/queue', (req, res) => {
+    const body = {
+        service_id: req.params.id,
+        user_id: req.user.id
+    };
+
+    return Services.findService(body.service_id).then((exists) => {
+        if (!exists) {
+            res.status(400).json({message: "Service does not exist."});
+        } else {
+            queueService.createQueue(body)
+                .then((queue) => res.json({id: queue.id, message: "Queue Successful."}))
+        }
+    })
+})
 
 router.post('/', (req, res) => {
     /**
