@@ -29,8 +29,8 @@ router.post('/', (req, res) => {
 
 router.get('/', (req, res) => {
     let {pageNo, resultsPerPage} = req.query;
-    let pgNum = (pageNo) ? pageNo : 1;
-    let pgRes = (resultsPerPage) ? resultsPerPage : 10;
+    let pgNum = pageNo ? parseInt(pageNo) : 1;
+    let pgRes = resultsPerPage ? parseInt(resultsPerPage) : 10;
     return Services.getServices(pgNum, pgRes)
         .then((results) => res.json(results))
         .catch(errorHandler.handleError(res))
