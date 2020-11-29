@@ -98,21 +98,7 @@ module.exports = {
     return total_queue_records;
   },
 
-  getServiceDetails: async (serviceId) => {
-    const service = await Service.findOne({where: {id: serviceId}});
-    const branch = await Branch.findOne({where: {id: service.BranchId}});
-    const business = await businessService.findBusinessById(branch.BusinessId);
-
-    const data = {
-      business_name: business.name,
-      branch_name: branch.name,
-      service_name: service.name,
-      last_in_queue: service.last_in_queue,
-      in_progress_queues: await queueService.getInProgress(serviceId)
-    };
-
-    return data;
-  },
+  getServiceDetails: async (id) => Service.findOne({where: {id}}),
 
 
   //UPDATE Operations
