@@ -44,8 +44,8 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/queues', (req, res) => {
     let {pageNo, resultsPerPage} = req.query;
-    let pgNum = (pageNo) ? pageNo : 1;
-    let pgRes = (resultsPerPage) ? resultsPerPage : 10;
+    let pgNum = pageNo ? parseInt(pageNo) : 1;
+    let pgRes = resultsPerPage ? parseInt(resultsPerPage) : 10;
     return Services.getServiceQueue(req.params.id, pgNum, pgRes)
         .then((service) => {
             if(service){
