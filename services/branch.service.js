@@ -45,11 +45,13 @@ module.exports = {
     
     findBranches: async (pageNo, resultsPerPage, businessId) => {
         const pageOffset = resultsPerPage * (pageNo - 1);
-        const total_queue_records = await Branch.count();
         const where = {};
         if(businessId) {
             where.business_id = businessId;
         }
+
+        const total_queue_records =  (businessId) ? await Branch.count({where}) : await Branch.count();
+
         const branchPaginate = await Branch.findAll({
             offset: pageOffset,
             limit: resultsPerPage,
