@@ -1,11 +1,11 @@
-const {Service, Queue, Branch, Business} = require('../models');
+const {Service, Queue, Branch, Business, sequelize} = require('../models');
 const branchService = require('./branch.service');
 const businessService = require('./business.service');
 const queueService = require('./queue.service');
-const { static } = require('express');
+const {static} = require('express');
 
 module.exports = {
-    /**
+  /**
    *
    * @param {{servicename:string, branchname:string}} body
    */
@@ -30,8 +30,8 @@ module.exports = {
     const pageOffset = resultsPerPage * (pageNo - 1);
 
     const where = {};
-    if(branchId) {
-        where.branch_id = branchId;
+    if (branchId) {
+      where.branch_id = branchId;
     }
     const total_queue_records = (branchId) ? await Service.count({where}) : await Service.count();
 
@@ -47,15 +47,15 @@ module.exports = {
     }
   },
 
-  queueService: async(body)=>{
+  queueService: async (body) => {
     let verify = await Service.findOne({
       where: {id: body.serviceId}
     });
-    if(verify.length > 0){
+    if (verify.length > 0) {
       let data = await Queue.create({
-        service_id:body.serviceId,
-        user_id:body.userId,
-        queue_number:verify.last_in_queue + 1
+        service_id: body.serviceId,
+        user_id: body.userId,
+        queue_number: verify.last_in_queue + 1
       });
     }
   },
@@ -88,18 +88,18 @@ module.exports = {
           }]
         }]
       }],
-      
+
       attributes: {
         include: [['id', 'queue_id']],
         exclude: ['id', 'ServiceId', 'UserId', 'teller_id', 'queue_number', 'createdAt', 'updatedAt']
       }
     })
-  
+
     return total_queue_records;
   },
 
   getServiceDetails: async (serviceId) => {
-    const service = await Service.findOne({where:{id: serviceId}});
+    const service = await Service.findOne({where: {id: serviceId}});
     const branch = await Branch.findOne({where: {id: service.BranchId}});
     const business = await businessService.findBusinessById(branch.BusinessId);
 
@@ -116,12 +116,12 @@ module.exports = {
 
 
   //UPDATE Operations
-  
+
 
   updateService: async (id, body) => {
-  /**
-   * @type {{servicename:string, branchId:bigint}}
-   */
+    /**
+     * @type {{servicename:string, branchId:bigint}}
+     */
     const servName = body.servicename;
     const brId = body.branchId;
     const service = await Service.findOne({where: {id}});
@@ -131,6 +131,24 @@ module.exports = {
 
     await service.save();
     return service;
+  },
+
+  queueUserToService: async (userId, serviceId) => {
+    return await sequelize.transaction(async (t) => {
+      const service = await Service.findOne({where: {id: serviceId}, lock: t.LOCK.UPDATE, transaction: t});
+      const queueNumber = service.last_in_queue + 1;
+      service.last_in_queue = queueNumber;
+      return Promise.all([
+          Queue.create({
+            UserId: userId,
+            ServiceId: serviceId,
+            queue_number: queueNumber,
+            status: 'IN_QUEUE'
+          }, {transaction: t}),
+          service.save({transaction: t})
+        ]
+      ).then((promisesResult) => promisesResult[0]);
+    });
   },
 
   resetQueue: async (id) => {
@@ -152,25 +170,25 @@ module.exports = {
   //   )
   //   return service;
   // },
-  updateQueue: async (serviceId) =>{
+  updateQueue: async (serviceId) => {
     const service = await Service.findOne({
       where: {id: serviceId}
     });
-    if(service.current_queue > 0){
-    const update1 = await Service.update(
-      {last_in_queue: service.last_in_queue + 1},
-      {where: {id: serviceId}},
-    )
-    }else{
-      const update2 = await Service.update(
-        {last_in_queue: service.last_in_queue + 1 , current_queue: 1},
+    if (service.current_queue > 0) {
+      const update1 = await Service.update(
+        {last_in_queue: service.last_in_queue + 1},
         {where: {id: serviceId}},
       )
-      }
+    } else {
+      const update2 = await Service.update(
+        {last_in_queue: service.last_in_queue + 1, current_queue: 1},
+        {where: {id: serviceId}},
+      )
+    }
     return;
   },
 
-  nextQueue: async (serviceId)=>{
+  nextQueue: async (serviceId) => {
     const queue = await Queue.findOne({
       where: {service_id: serviceId, status: 'IN_QUEUE'}
     });
@@ -182,14 +200,14 @@ module.exports = {
       {current_queue: queue.queue_number},
       {where: {id: serviceId}},
     )
-    
+
     return queue;
   },
- 
+
   //DELETE Operations (In-Progress)
   deleteService: async (id) => {
     await Service.destroy({where: {id}}).then(async () => {
-      await Queue.destroy({where: {ServiceId:id}});
+      await Queue.destroy({where: {ServiceId: id}});
     })
     return;
   }

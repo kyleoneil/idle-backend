@@ -25,23 +25,6 @@ const errorHandler = require('./errorHandler');
 //     }
 // })
 
-router.post('/', (req, res) => {
-  const body = req.body;
-  if (!body.user_id || !body.service_id) {
-    res.status(400).json({message: "There is no user id or servrice id"});
-    return;
-  }
-  userService.findById(body.user_id).then((exists) => {
-    if (!exists) {
-      res.status(400).json({message: "User doesn't exists"});
-    } else {
-      queueService.createQueue(body)
-        .then((id) => res.json({id: id, message: "Queue successfully created."}))
-        .catch(errorHandler.handleError(res));
-    }
-  });
-});
-
 router.patch('/:id', (req, res) => {
   const body = req.body;
   queueService.update(req.params.id, body)
