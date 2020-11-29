@@ -56,6 +56,8 @@ Folder [seeders](./seeders) contains the script that will populate the database 
 
 Just execute `npx sequelize-cli db:seed:all` 
 
+Note: if you are recreating the DB, make sure that `sequelize-data-dev.json` is deleted. That file holds the files that were seeded in the database on every `db:seed:all` call.
+
 ## How to generate models
 
 We are doing hybrid approach in generating the models and doing [migrations](https://sequelize.org/master/manual/migrations.html). Here are the steps:
