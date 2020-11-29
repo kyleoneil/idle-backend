@@ -10,8 +10,8 @@ module.exports = {
       },
       customer_id: {
         type: Sequelize.BIGINT,
-        references:{
-          model:{
+        references: {
+          model: {
             tableName: 'users',
           },
           key: 'id'
@@ -20,8 +20,8 @@ module.exports = {
       },
       service_id: {
         type: Sequelize.BIGINT,
-        references:{
-          model:{
+        references: {
+          model: {
             tableName: 'services',
           },
           key: 'id'
@@ -30,23 +30,23 @@ module.exports = {
       },
       teller_id: {
         type: Sequelize.BIGINT,
-        references:{
-          model:{
+        references: {
+          model: {
             tableName: 'users',
           },
           key: 'id'
         },
         allowNull: false
       },
-      queue_number:{
+      queue_number: {
         type: Sequelize.BIGINT,
         allowNull: false
       },
       status: {
-        type:Sequelize.TEXT,
-        
+        type: Sequelize.TEXT,
+
       }
-  },
+    });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Queues');
