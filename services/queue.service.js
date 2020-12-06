@@ -1,40 +1,66 @@
 const {Queue, Service} = require('./../models');
 const Services = require('./service.service');
 const userServices = require('./user.service');
-const sequelize = require('sequelize');
-const {static} = require('express');
+const { static } = require('express');
 
 module.exports = {
-  getQueues: async (pageNo, resultsPerPage, queries) => {
-    let {user_id, service_id, teller_id, status} = queries;
-    const where = {};
-    if (user_id) {
-      where.service_id = user_id;
+    /**
+   *
+   * @param {{customer_id:bigint, service_id:bigint}} body
+   */
+  createQueue: async (body) => {
+    const serviceId = body.service_id;
+    const userId = body.user_id;
+    const service = await Service.findOne({where: {id: serviceId}});
+    const customer = await userServices.findById(userId);
+    const data = {UserId: customer.id, ServiceId: service.id};
+    data.customer_id = body.user_id;
+    data.service_id = body.service_id;
+    data.queue_number = service.last_in_queue + 1;
+    data.status = 1;
+    service.last_in_queue++;
+    service.save();
+    const queue = await Queue.create(data);
+    return queue.id;
+  },
+
+  getQueues: async (userId, serviceId, pageNo, resultsPerPage) => {
+    const where = {}
+    if (userId) {
+      where.user_id = userId;
+    } else if (serviceId) {
+      where.service_id = serviceId;
     }
-    if (service_id) {
-      where.service_id = service_id;
-    }
-    if (teller_id) {
-      where.teller_id = teller_id;
-    }
-    if (status) {
-      where.status = status;
-    }
-    return {
-      totalRecords: await Queue.count({where}),
-      data: await Queue.findAll({where})
-    }
+
+     
+    const pageOffset = resultsPerPage * (pageNo - 1);
+    const total_queue_records = await Queue.findAll({
+      offset: pageOffset,
+      limit: resultsPerPage,
+      where
+    });
+  
+    return total_queue_records;
+  },
+
+  getUserQueues: async (serviceId, pageNo, userId) => {
+    const pageOffset = resultsPerPage * (pageNo - 1);
+    const total_queue_records = await Queue.findAndCountAll({
+      where: {user_id: userId},
+      offset: pageOffset,
+      limit: resultsPerPage,
+    })
   },
 
   getInProgress: async (serviceId) => {
-    const queues = Queue.findAll({
+    const queues = await Queue.findAll({
       where: {
         service_id: serviceId,
         status: 'IN_PROGRESS'
       }
     });
 
-    return (queues) ? queues : 0;
+    return (queues)? queues: 0;
   },
 
   // updateQueue: async (serviceId) => {
