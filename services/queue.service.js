@@ -60,7 +60,7 @@ module.exports = {
       limit: resultsPerPage,
       where,
       attributes: {
-        exclude: ['id', 'createdAt', 'updatedAt', 'deletedAt', 'UserId', 'ServiceId']
+        exclude: ['id','updatedAt', 'deletedAt', 'UserId', 'ServiceId']
       },
       include: [{
         model: Service,
