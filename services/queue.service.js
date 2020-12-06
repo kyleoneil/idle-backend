@@ -34,7 +34,7 @@ module.exports = {
       where.service_id = serviceId;
     }
     where.status = queueStatus;
-     
+
     const pageOffset = resultsPerPage * (pageNo - 1);
 
     const total_queue_records = await Queue.count({where})
@@ -43,21 +43,21 @@ module.exports = {
       limit: resultsPerPage,
       where
     });
-  
+
     return {
       totalRecords: total_queue_records,
       data: queuePaginate
-    } 
+    }
   },
 
-  getUserQueues: async (userId, pageNo, resultsPerPage) => {
+  getUserQueues: async (userId, pageNo, resultsPerPage, status = ['IN_QUEUE', 'IN_PROGRESS']) => {
     const pageOffset = resultsPerPage * (pageNo - 1);
-
-    const total_queue_records = await Queue.count({where: {user_id: userId}})
+    const where = {user_id: userId, status};
+    const total_queue_records = await Queue.count({where})
     const queuePaginate = await Queue.findAll({
       offset: pageOffset,
       limit: resultsPerPage,
-      where: {user_id: userId},
+      where,
       attributes: {
         exclude: ['id', 'createdAt', 'updatedAt','deletedAt', 'UserId', 'ServiceId']
       },
