@@ -1,7 +1,9 @@
-const {Queue, Service} = require('./../models');
+const {Business, Branch, Queue, Service} = require('./../models');
 const Services = require('./service.service');
 const userServices = require('./user.service');
 const { static } = require('express');
+
+//const getStatus = ()
 
 module.exports = {
     /**
@@ -24,32 +26,67 @@ module.exports = {
     return queue.id;
   },
 
-  getQueues: async (userId, serviceId, pageNo, resultsPerPage) => {
+  getQueues: async (userId, serviceId, queueStatus, pageNo, resultsPerPage) => {
     const where = {}
     if (userId) {
       where.user_id = userId;
     } else if (serviceId) {
       where.service_id = serviceId;
     }
-
+    where.status = queueStatus;
      
     const pageOffset = resultsPerPage * (pageNo - 1);
-    const total_queue_records = await Queue.findAll({
+
+    const total_queue_records = await Queue.count({where})
+    const queuePaginate = await Queue.findAll({
       offset: pageOffset,
       limit: resultsPerPage,
       where
     });
   
-    return total_queue_records;
+    return {
+      totalRecords: total_queue_records,
+      data: queuePaginate
+    } 
   },
 
-  getUserQueues: async (serviceId, pageNo, userId) => {
+  getUserQueues: async (userId, pageNo, resultsPerPage) => {
     const pageOffset = resultsPerPage * (pageNo - 1);
-    const total_queue_records = await Queue.findAndCountAll({
-      where: {user_id: userId},
+
+    const total_queue_records = await Queue.count({where: {user_id: userId}})
+    const queuePaginate = await Queue.findAll({
       offset: pageOffset,
       limit: resultsPerPage,
-    })
+      where: {user_id: userId},
+      attributes: {
+        exclude: ['id', 'createdAt', 'updatedAt','deletedAt', 'UserId', 'ServiceId']
+      },
+      include: [{
+        model: Service,
+        attributes: {
+          include: [['name', 'service_name']],
+          exclude: ['id','name', 'last_in_queue', 'current_queue', 'createdAt', 'updatedAt', 'deletedAt', 'BranchId']
+        },
+        include: [{
+          model: Branch,
+          attributes: {
+            exclude: ['id', 'name','createdAt', 'updatedAt','deletedAt']
+          },
+          include: [{
+            model: Business,
+            attributes: {
+              include: [['name', 'business_name']],
+              exclude: ['id', 'name','createdAt', 'updatedAt','deletedAt']
+            }
+          }]
+        }]
+      }]
+    });
+
+    return {
+      totalRecords: total_queue_records,
+      data: queuePaginate
+    }
   },
 
   getInProgress: async (serviceId) => {
