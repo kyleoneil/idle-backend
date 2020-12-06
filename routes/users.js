@@ -47,19 +47,19 @@ router.get('/', (req, res) => {
     .catch(errorHandler.handleError(res));
 });
 
-router.get('/:id/currentqueues', (req, res) => {
-  let {pageNo, resultsPerPage} = req.query;
-  let pgNum = pageNo ? parseInt(pageNo) : 1;
-  let pgRes = resultsPerPage ? parseInt(resultsPerPage) : 10;
-  return queueService.getUserQueues(req.params.id, pgNum, pgRes)
-    .then((results) => res.json(results))
-    .catch(errorHandler.handleError(res));
-})
-
 router.post('/', (req, res) => {
   /**
    * @type {{firstname:string, lastname:string, birthdate:string, email:string, password:string}}
    */
+});
+
+router.get('/current/queues', (req, res) => {
+  let {pageNo, resultsPerPage} = req.query;
+  let pgNum = pageNo ? parseInt(pageNo) : 1;
+  let pgRes = resultsPerPage ? parseInt(resultsPerPage) : 10;
+  return userService.findPaginated(pgNum, pgRes)
+    .then((results) => res.json(results))
+    .catch(errorHandler.handleError(res));
 });
 
 module.exports = router;

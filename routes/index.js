@@ -48,5 +48,6 @@ app.use('/branches', require('./branches'));
 app.use('/users', require('./users'));
 app.use('/queues', require('./queues'));
 app.use('/services', require('./services'));
+app.use('/me', require('./me'));
 
 module.exports = app;
