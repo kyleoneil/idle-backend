@@ -1,12 +1,13 @@
 const {Business, Branch, Queue, Service} = require('./../models');
 const Services = require('./service.service');
 const userServices = require('./user.service');
-const { static } = require('express');
+const {static} = require('express');
+const ServiceError = require('./errors/serviceError');
 
 //const getStatus = ()
 
 module.exports = {
-    /**
+  /**
    *
    * @param {{customer_id:bigint, service_id:bigint}} body
    */
@@ -26,14 +27,14 @@ module.exports = {
     return queue.id;
   },
 
-  getQueues: async (userId, serviceId, queueStatus, pageNo, resultsPerPage) => {
+  findAll: async (pageNo, resultsPerPage, serviceId, status) => {
     const where = {}
-    if (userId) {
-      where.user_id = userId;
-    } else if (serviceId) {
-      where.service_id = serviceId;
+    if (serviceId) {
+      // where.service_id = serviceId;
     }
-    where.status = queueStatus;
+    if(status) {
+      where.status = status;
+    }
 
     const pageOffset = resultsPerPage * (pageNo - 1);
 
@@ -59,24 +60,24 @@ module.exports = {
       limit: resultsPerPage,
       where,
       attributes: {
-        exclude: ['id', 'createdAt', 'updatedAt','deletedAt', 'UserId', 'ServiceId']
+        exclude: ['id', 'createdAt', 'updatedAt', 'deletedAt', 'UserId', 'ServiceId']
       },
       include: [{
         model: Service,
         attributes: {
           include: [['name', 'service_name']],
-          exclude: ['id','name', 'last_in_queue', 'current_queue', 'createdAt', 'updatedAt', 'deletedAt', 'BranchId']
+          exclude: ['id', 'name', 'last_in_queue', 'current_queue', 'createdAt', 'updatedAt', 'deletedAt', 'BranchId']
         },
         include: [{
           model: Branch,
           attributes: {
-            exclude: ['id', 'name','createdAt', 'updatedAt','deletedAt']
+            exclude: ['id', 'name', 'createdAt', 'updatedAt', 'deletedAt']
           },
           include: [{
             model: Business,
             attributes: {
               include: [['name', 'business_name']],
-              exclude: ['id', 'name','createdAt', 'updatedAt','deletedAt']
+              exclude: ['id', 'name', 'createdAt', 'updatedAt', 'deletedAt']
             }
           }]
         }]
@@ -97,7 +98,7 @@ module.exports = {
       }
     });
 
-    return (queues)? queues: 0;
+    return (queues) ? queues : 0;
   },
 
   // updateQueue: async (serviceId) => {
@@ -129,5 +130,13 @@ module.exports = {
       queue.status = status;
     }
     return await queue.save();
+  },
+  markQueueAsCompleted: async (id) => {
+    const queue = await Queue.findOne({where: {id}});
+    if (queue.status !== 'IN_PROGRESS') {
+      throw new ServiceError('Queue is not in progress');
+    }
+    queue.status = 'COMPLETED';
+    return queue.save();
   }
 };
