@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const dateUtil = require('./../utils/dateUtil');
 const userService = require('./../services/user.service');
+const queueService = require('../services/queue.service');
 const errorHandler = require('./errorHandler');
 
 router.post('/', (req, res) => {
@@ -45,6 +46,15 @@ router.get('/', (req, res) => {
     .then((results) => res.json(results))
     .catch(errorHandler.handleError(res));
 });
+
+router.get('/:id/currentqueues', (req, res) => {
+  let {pageNo, resultsPerPage} = req.query;
+  let pgNum = pageNo ? parseInt(pageNo) : 1;
+  let pgRes = resultsPerPage ? parseInt(resultsPerPage) : 10;
+  return queueService.getUserQueues(req.params.id, pgNum, pgRes)
+    .then((results) => res.json(results))
+    .catch(errorHandler.handleError(res));
+})
 
 router.post('/', (req, res) => {
   /**
