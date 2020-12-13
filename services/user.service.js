@@ -14,6 +14,8 @@ const findByEmail = (email, loadRole = false) => {
 };
 
 module.exports = {
+
+  //CREATE Operations
   /**
    *
    * @param {{firstname:string, lastname:string, birthdate:string, email:string,password:string,roleName:string}} body
@@ -28,6 +30,8 @@ module.exports = {
     const user = await User.create(copy);
     return user.id;
   },
+
+  //READ Operations
   userExists: async (email) => {
     const user = await findByEmail(email);
     return !!user; // or user != null
@@ -61,5 +65,21 @@ module.exports = {
       totalRecords: total_queue_records,
       data: userPaginated
     }
+  },
+
+  //UPDATE Operations
+  update: async (uID, data) => {
+    /**
+    * @type {{firstname:string, lastname:string, birthdate:string, email:string, password:string}}
+    */
+
+    const user = await User.findOne({where: {id: uID}});
+    user.name = `${data.lastname}, ${data.firstname}`;
+    user.birthdate = new Date(data.birthdate);
+    user.password = bcrypt.hashSync(data.password, saltRounds);
+
+    await user.save();
+
+    return user.id;
   }
 }

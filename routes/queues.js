@@ -27,33 +27,28 @@ router.post('/:id/completed', (req, res) => {
     .catch(errorHandler.handleError(res));
 });
 
-router.patch('/:id', (req, res) => {
-  queueService.update(req.params.id, req.body)
-    .then((data) => res.json({data: data, message: "Queue successfully updated."}))
-    .catch(errorHandler.handleError(res));
-});
-
 router.get('/', (req, res) => {
   let {pageNo, resultsPerPage, serviceId, status} = req.query;
   let pgNum = pageNo ? parseInt(pageNo) : 1;
   let pgRes = resultsPerPage ? parseInt(resultsPerPage) : 10;
-  return queueService.findAll(serviceId, pgNum, pgRes)
+  return queueService.findAll(pgNum, pgRes, serviceId, status)
     .then((data) => res.json({data: data, message: "Queue List fetched."}))
     .catch(errorHandler.handleError(res));
 });
 
-
-router.get('/currentqueue', (req, res) => {
-  const body = req.body;
-  // if (   if the caller is not a superadmin basically if the caller is a user   ) {
-  //     res.status(403).json({message: ""});
-  //     return;
-  //   }
-  queueService.getInProgress(body.service_id)
-  .then((data) => res.json({data: data, message: "Current Queue List fetched."}))
-  .catch(errorHandler.handleError(res));
+router.get('/:id/currentqueue', (req, res) => {
+  return queueService.getInProgress(req.params.id)
+    .then((data) => res.json({data: data}))
+    .catch(errorHandler.handleError(res));
 });
 
-
+router.patch('/:id', (req, res) => {
+  let {status} = req.query;
+  const uID = req.params.id;
+  const tellerID = parseInt(req.user.id)
+  return queueService.update(uID, tellerID, status)
+    .then((results) => res.json({data: results, message: "Queue Updated Successfully."}))
+    .catch(errorHandler.handleError(res));
+});
 
 module.exports = router;

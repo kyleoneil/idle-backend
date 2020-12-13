@@ -33,7 +33,6 @@ app.use('/', express_jwt({
       } else if (!user.token || user.token !== token) {
         res.status(403).json({message: 'Session timeout. Please logout then login again.'});
       } else {
-        console.log({token});
         next();
       }
     })

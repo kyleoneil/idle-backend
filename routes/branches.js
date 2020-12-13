@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
     }).catch(errorHandler.handleError(res))
 })
 
-router.patch('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     /**
    * @type {{branchname:string, businessId:string}}
    */

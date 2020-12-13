@@ -30,7 +30,7 @@ module.exports = {
   findAll: async (pageNo, resultsPerPage, serviceId, status) => {
     const where = {}
     if (serviceId) {
-      // where.service_id = serviceId;
+      where.service_id = serviceId;
     }
     if(status) {
       where.status = status;
@@ -101,36 +101,29 @@ module.exports = {
     return (queues) ? queues : 0;
   },
 
-  // updateQueue: async (serviceId) => {
-  //   const service = await Service.findOne({ where: {id: serviceId} });
-  //   service.last_in_queue++;
-  //   await Service.update(
-  //     {last_in_queue: service.last_in_queue},
-  //     {where: {id: service.id}}
-  //   )
-  //   return service;
-  // },
-
-  update: async (id, data) => {
-    const {user_id, service_id, teller_id, queue_number, status} = data;
-    const queue = await Queue.findOne({where: {id}});
-    if (user_id) {
-      queue.user_id = user_id;
+  //UPDATE Operations
+  update: async (id, teller, status) => {
+    const queue = await Queue.findOne({
+      where: {id},
+      attributes: {
+        include: ['teller_id']
+      }
+      
+    });
+    
+    if (status) { //WIP: Teller_ID Update Nonfunctional atm
+      const queueupdate = await Queue.update(
+        {
+          status,
+          teller_id: teller
+        }, 
+        {where: {id: queue.id}},
+      )
     }
-    if (service_id) {
-      queue.service_id = service_id;
-    }
-    if (teller_id) {
-      queue.service_id = teller_id;
-    }
-    if (queue_number) {
-      queue.queue_number = queue_number;
-    }
-    if (status) {
-      queue.status = status;
-    }
+    console.log(queue.teller_id);
     return await queue.save();
   },
+
   markQueueAsCompleted: async (id) => {
     const queue = await Queue.findOne({where: {id}});
     if (queue.status !== 'IN_PROGRESS') {
