@@ -14,7 +14,7 @@ module.exports = {
         email: 'admin@idle.com',
         password: 'admin',
         roleName: 'SUPER_ADMIN'
-      }),
+      });
       await userService.create({
         firstname: 'test',
         lastname: 'businessowner',
@@ -22,7 +22,7 @@ module.exports = {
         email: 'owner@idle.com',
         password: 'businessowner',
         roleName: 'BUSINESS_OWNER'
-      }),
+      });
       await userService.create({
         firstname: 'test',
         lastname: 'businessteller',
@@ -30,7 +30,7 @@ module.exports = {
         email: 'teller@idle.com',
         password: 'businessteller',
         roleName: 'BUSINESS_TELLER'
-      }),
+      });
       await userService.create({
         firstname: 'test',
         lastname: 'customer',
