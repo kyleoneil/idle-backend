@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       const Role = models.Role;
       Role.hasMany(User, {foreignKey: {allowNull: false}});
       User.belongsTo(Role);
+      // Note: business_id bigint should not be null if user role is BUSINESS_OWNER
+      const Business = models.Business;
+      Business.hasMany(User, {foreignKey: {allowNull: true}});
+      User.belongsTo(Business);
     }
   }
   User.init({
