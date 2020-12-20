@@ -1,17 +1,19 @@
 'use strict';
 
+const env = process.env.NODE_ENV || 'development';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     if (env === 'development') {
       const now = new Date();
-      const inQueue = 'IN-QUEUE';
+      const inQueue = 'IN_QUEUE';
       await queryInterface.bulkInsert('queues', [
-        {id: 1, user_id: 1, service_id: 1, status: inQueue, created_at: now, updated_at: now},
-        {id: 2, user_id: 2, service_id: 2, status: 'COMPLETED', created_at: now, updated_at: now},
-        {id: 3, user_id: 3, service_id: 3, status: 'IN_PROGRESS', created_at: now, updated_at: now},
-        {id: 4, user_id: 4, service_id: 4, status: 'NO_SHOW', created_at: now, updated_at: now},
-        {id: 5, user_id: 1, service_id: 1, status: inQueue, created_at: now, updated_at: now},
-        {id: 6, user_id: 2, service_id: 2, status: 'COMPLETED', created_at: now, updated_at: now},
+        {user_id: 1, service_id: 1, status: inQueue, created_at: now, updated_at: now},
+        {user_id: 2, service_id: 2, status: 'COMPLETED', created_at: now, updated_at: now},
+        {user_id: 3, service_id: 3, status: 'IN_PROGRESS', created_at: now, updated_at: now},
+        {user_id: 4, service_id: 4, status: 'NO_SHOW', created_at: now, updated_at: now},
+        {user_id: 1, service_id: 1, status: inQueue, created_at: now, updated_at: now},
+        {user_id: 2, service_id: 2, status: 'COMPLETED', created_at: now, updated_at: now},
       ])
     }
   },
