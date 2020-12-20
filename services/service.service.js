@@ -1,4 +1,4 @@
-const {Service, Queue, Branch, Business} = require('../models');
+const {Service, Queue, Branch, User} = require('../models');
 const branchService = require('./branch.service');
 const businessService = require('./business.service');
 const queueService = require('./queue.service');
@@ -66,6 +66,19 @@ module.exports = {
       where: {service_id: serviceId},
       offset: pageOffset,
       limit: resultsPerPage,
+      include: [{
+        model: User,
+        attributes: {
+          include: [
+            ['name', 'customer_name'], 
+            ['email', 'customer_email'],
+          ],
+          exclude: [
+            'id', 'name', 'email', 'password', 'lastLogin', 'RoleId',
+            'createdAt', 'updatedAt', 'deletedAt', 'token'
+          ]
+        }
+      }]
     })
   
     return total_queue_records;
