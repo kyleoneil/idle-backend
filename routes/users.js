@@ -28,20 +28,18 @@ router.post('/', (req, res) => {
       businessService.findBusinessById(body.business_id).then((result) => {
         if (!result) {
           res.status(400).json({message: "Given business is not registered."});
-          return; 
         }
-      })
+      }).catch(errorHandler.handleError(res));
     } else if (body.branch_id) {
-      branchService.findById(body.branch_id).then((result) => {
-        if (!result) {
+      branchService.findById(body.branch_id).then((results) => {
+        if (!results) {
           res.status(400).json({message: "Given branch is not registered."});
-          return; 
         }
-      })
+      }).catch(errorHandler.handleError(res));
     } else {
       res.status(400).json({message: "Please enter valid business or branch."});
-      return;
     }
+    return;
   }
 
   // You cannot use await here. See https://javascript.info/async-await#await
