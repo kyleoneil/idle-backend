@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const authService = require('./../services/auth.service');
 const branchService = require('../services/branch.service');
 const businessService = require('../services/business.service');
 const Services = require('../services/service.service');
@@ -84,26 +85,43 @@ router.put('/:id', (req, res) => {
     /**
    * @type {{servicename:string, branchId:bigint}}
    */
-    const body = req.body;
-    if (!body.servicename) {
-        res.status(400).json({message: "Please enter a service name."})
-    }
-
-    return branchService.findById(body.branchId).then((exists) => {
-        if (!exists) {
-            res.status(400).json({message: "Branch does not exist."});
+    const roleName = req.user.roleName;
+    return authService.isAuthorized(roleName, 'BUSINESS_OWNER').then((result) => {
+        if (result) {
+            const body = req.body;
+            if (!body.servicename) {
+                res.status(400).json({message: "Please enter a service name."})
+            }
+        
+            return branchService.findById(body.branchId).then((exists) => {
+                if (!exists) {
+                    res.status(400).json({message: "Branch does not exist."});
+                } else {
+                    Services.updateService(req.params.id, body)
+                        .then((service) => res.json({id: service.id, message: "Service has been updated."}))
+                        .catch(errorHandler.handleError(res));
+                }
+            })
         } else {
-            Services.updateService(req.params.id, body)
-                .then((service) => res.json({id: service.id, message: "Service has been updated."}))
-                .catch(errorHandler.handleError(res));
+            res.status(400).json({message: "User is not authorized to make changes."});
+            return;
         }
     })
+    
 })
 
 router.delete('/:id', (req, res) => {
-    return Services.deleteService(req.params.id)
-        .then(() => res.json({message: "Service deleted successfully."}))
-        .catch(errorHandler.handleError(res));
+    const roleName = req.user.roleName;
+    return authService.isAuthorized(roleName, 'BUSINESS_OWNER').then((result) => {
+        if (result) {
+            return Services.deleteService(req.params.id)
+                .then(() => res.json({message: "Service deleted successfully."}))
+                .catch(errorHandler.handleError(res));
+        } else {
+            res.status(400).json({message: "User is not authorized to make changes."});
+            return;
+        }
+    })
 })
 
 

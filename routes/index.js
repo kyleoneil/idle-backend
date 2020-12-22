@@ -27,6 +27,7 @@ app.use('/', express_jwt({
   const jwtUser = req.user;
   if (jwtUser && req.path !== '/auth/logout') {
     // req.user is the object signed in jwt.sign. See auth.service.js#login
+    console.log({rolename: req.user.roleName});
     userService.findById(jwtUser.id).then((user) => {
       if (!user) {
         res.status(401).json({message: 'Unauthorized access.'});

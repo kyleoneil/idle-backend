@@ -33,5 +33,9 @@ module.exports = {
   checkPwd: async (email, rawPass) => {
     const user = await userService.findByEmail(email, true);
     return bcrypt.compareSync(rawPass, user.password);
+  },
+
+  isAuthorized: async (userRole, authRole) => {
+    return (userRole === 'SUPER_ADMIN' || userRole === authRole);
   }
 }

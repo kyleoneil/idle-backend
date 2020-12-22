@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { restart } = require('nodemon');
 const businessService = require('./../services/business.service');
+const authService = require('./../services/auth.service');
 const errorHandler = require('./errorHandler');
 
 router.post('/', (req, res) => {
@@ -47,27 +48,46 @@ router.put('/:id', (req, res) => {
     /**
    * @type {{businessname:string}}
    */
-    const body = req.body;
-    if(!body.businessname) {
-        res.status(400).json({message:"Please enter a business name."});
-        return;
-    }
 
-    return businessService.findBusinessByName(body.businessname).then((exists) => {
-        if (exists) {
-            res.status(400).json({message: "Business already exists."})
+    const roleName = req.user.roleName;
+    return authService.isAuthorized(roleName, 'BUSINESS_OWNER').then((result) => {
+        if (result) {
+            const body = req.body;
+            if(!body.businessname) {
+                res.status(400).json({message:"Please enter a business name."});
+                return;
+            }
+
+            return businessService.findBusinessByName(body.businessname).then((exists) => {
+                if (exists) {
+                    res.status(400).json({message: "Business already exists."})
+                } else {
+                    businessService.updateBusiness(req.params.id, body.businessname)
+                        .then((business) => res.json({id: business.id, message: "Business updated successfully."}))
+                        .catch(errorHandler.handleError(res));
+                }
+            })
         } else {
-            businessService.updateBusiness(req.params.id, body.businessname)
-                .then((business) => res.json({id: business.id, message: "Business updated successfully."}))
-                .catch(errorHandler.handleError(res));
+            res.status(400).json({message: "User is not authorized to make changes."});
+            return;
         }
     })
+    
 })
 
 router.delete('/:id', (req, res) => {
-    return businessService.deleteBusiness(req.params.id)
-        .then(() => res.json({message: "Business deleted successfully."}))
-        .catch(errorHandler.handleError(res));
+    const roleName = req.user.roleName;
+    return authService.isAuthorized(roleName, 'BUSINESS_OWNER').then((result) => {
+        if (result) {
+            return businessService.deleteBusiness(req.params.id)
+                .then(() => res.json({message: "Business deleted successfully."}))
+                .catch(errorHandler.handleError(res));
+        } else {
+            res.status(400).json({message: "User is not authorized to make changes."});
+            return;
+        }
+    })
+    
 })
 
 module.exports = router;

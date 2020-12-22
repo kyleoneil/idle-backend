@@ -23,7 +23,7 @@ module.exports = {
   create: async (body) => {
     const roleName = body.roleName ? body.roleName : 'CUSTOMER';
     const role = await roleService.findByName(roleName)
-    const copy = {RoleId: role.id, BusinessId: body.business_id, ...body};
+    const copy = {RoleId: role.id, BusinessId: body.business_id, BranchId: body.branch_id, ...body};
     copy.name = `${body.lastname}, ${body.firstname}`
     copy.birthdate = new Date(body.birthdate);
     copy.password = bcrypt.hashSync(body.password, saltRounds)
@@ -74,6 +74,8 @@ module.exports = {
     */
 
     const user = await User.findOne({where: {id: uID}});
+    user.BusinessId = data.business_id;
+    user.BranchId = data.branch_id;
     user.name = `${data.lastname}, ${data.firstname}`;
     user.birthdate = new Date(data.birthdate);
     user.password = bcrypt.hashSync(data.password, saltRounds);

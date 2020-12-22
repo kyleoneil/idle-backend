@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const authService = require('./../services/auth.service');
 const branchService = require('./../services/branch.service');
 const businessService = require('./../services/business.service');
 const errorHandler = require('./errorHandler');
@@ -49,26 +50,44 @@ router.put('/:id', (req, res) => {
     /**
    * @type {{branchname:string, businessId:string}}
    */
-    const body = req.body;
-    if (!body.branchname) {
-        res.status(400).json({message: "Please enter a branch name."})
-    }
+    const roleName = req.user.roleName;
+    return authService.isAuthorized(roleName, 'BUSINESS_OWNER').then((result) => {
+        if (result) {
+            const body = req.body;
+            if (!body.branchname) {
+                res.status(400).json({message: "Please enter a branch name."})
+            }
 
-    return businessService.findBusinessById(body.businessId).then((exists) => {
-        if (!exists) {
-            res.status(400).json({message: "Business does not exist."});
+            return businessService.findBusinessById(body.businessId).then((exists) => {
+                if (!exists) {
+                    res.status(400).json({message: "Business does not exist."});
+                } else {
+                    branchService.updateBranch(req.params.id, body)
+                        .then((branch) => res.json({id: branch.id, message: "Branch has been updated."}))
+                        .catch(errorHandler.handleError(res));
+                }
+            })
         } else {
-            branchService.updateBranch(req.params.id, body)
-                .then((branch) => res.json({id: branch.id, message: "Branch has been updated."}))
-                .catch(errorHandler.handleError(res));
+            res.status(400).json({message: "User is not authorized to make changes."});
+            return;
         }
     })
+    
 })
 
 router.delete('/:id', (req, res) => {
-    return branchService.deleteBranch(req.params.id)
-        .then(() => res.json({message: "Branch deleted successfully."}))
-        .catch(errorHandler.handleError(res));
+    const roleName = req.user.roleName;
+    return authService.isAuthorized(roleName, 'BUSINESS_OWNER').then((result) => {
+        if (result) {
+            return branchService.deleteBranch(req.params.id)
+                .then(() => res.json({message: "Branch deleted successfully."}))
+                .catch(errorHandler.handleError(res));
+        } else {
+            res.status(400).json({message: "User is not authorized to make changes."});
+            return;
+        }
+    })
+    
 })
 
 module.exports = router;
