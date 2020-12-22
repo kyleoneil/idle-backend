@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       const Business = models.Business;
       Business.hasMany(User, {foreignKey: {allowNull: true}});
       User.belongsTo(Business);
+      const Branch = models.Branch;
+      Branch.hasMany(User, {foreignKey: {allowNull: true}});
+      User.belongsTo(Branch);
     }
   }
   User.init({
