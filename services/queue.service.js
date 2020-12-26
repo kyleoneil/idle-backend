@@ -32,7 +32,7 @@ module.exports = {
     if (serviceId) {
       where.service_id = serviceId;
     }
-    if(status) {
+    if (status) {
       where.status = status;
     }
 
@@ -52,15 +52,13 @@ module.exports = {
   },
 
   getUserQueues: async (userId, pageNo, resultsPerPage, status = ['IN_QUEUE', 'IN_PROGRESS']) => {
-    const pageOffset = resultsPerPage * (pageNo - 1);
     const where = {user_id: userId, status};
-    const total_queue_records = await Queue.count({where})
-    const queuePaginate = await Queue.findAll({
-      offset: pageOffset,
-      limit: resultsPerPage,
+    const total_queue_records = await Queue.count({where});
+
+    const options = {
       where,
       attributes: {
-        exclude: ['id','updatedAt', 'deletedAt', 'UserId', 'ServiceId']
+        exclude: ['updatedAt', 'deletedAt', 'UserId', 'ServiceId']
       },
       include: [{
         model: Service,
@@ -82,7 +80,14 @@ module.exports = {
           }]
         }]
       }]
-    });
+    };
+
+    if (pageNo && resultsPerPage) {
+      options.offset = resultsPerPage * (pageNo - 1);
+      options.limit = resultsPerPage;
+    }
+
+    const queuePaginate = await Queue.findAll(options);
 
     return {
       totalRecords: total_queue_records,
@@ -108,15 +113,15 @@ module.exports = {
       attributes: {
         include: ['teller_id']
       }
-      
+
     });
-    
+
     if (status) { //WIP: Teller_ID Update Nonfunctional atm
       const queueupdate = await Queue.update(
         {
           status,
           teller_id: teller
-        }, 
+        },
         {where: {id: queue.id}},
       )
     }
