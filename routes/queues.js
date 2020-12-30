@@ -1,24 +1,26 @@
 const router = require('express').Router();
 const userService = require('./../services/user.service');
-//const Services = require('./../services/service.service');
 const queueService = require('./../services/queue.service');
 const errorHandler = require('./errorHandler');
+const {ROLE_CUSTOMER} = require('./../constants/user');
 
 router.post('/', (req, res) => {
-    const body = req.body;
-     if ( !body.user_id || !body.service_id) {
-         res.status(400).json({message: "There is no user id or servrice id"});
-         return;
-       }
-       userService.findById(body.user_id).then((exists) => {
-        if (!exists) {
-          res.status(400).json({message: "User doesn't exists"});
-        } else {
-         queueService.createQueue(body)
-        .then((id) => res.json({id: id, message: "Queue successfully created."}))
-        .catch(errorHandler.handleError(res));
-        }
-        });
+  const body = req.body;
+  if (!body.service_id) {
+    res.status(400).json({message: "Request body service_id is required."});
+    return;
+  }
+  const user = req.user;
+  if (user.roleName === ROLE_CUSTOMER) {
+    if (body.user_id && body.user_id !== user.id) {
+      res.status(403).json({message: "User is not allowed to create a queue for another user."});
+      return;
+    }
+    body.user_id = user.id;
+  }
+  queueService.createQueue(body)
+    .then((id) => res.json({id: id, message: "Queue successfully created."}))
+    .catch(errorHandler.handleError(res));
 });
 
 router.post('/:id/completed', (req, res) => {

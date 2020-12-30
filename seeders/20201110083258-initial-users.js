@@ -1,5 +1,6 @@
 'use strict';
 
+const {ROLE_CUSTOMER} = require('./../constants/user');
 const env = process.env.NODE_ENV || 'development';
 
 module.exports = {
@@ -37,7 +38,7 @@ module.exports = {
         birthdate: '03/05/1997',
         email: 'customer@idle.com',
         password: 'customer',
-        roleName: 'CUSTOMER'
+        roleName: ROLE_CUSTOMER
       })
     }
   },

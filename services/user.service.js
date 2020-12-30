@@ -2,6 +2,7 @@ const {User, Role} = require('./../models');
 const bcrypt = require('bcrypt');
 const {saltRounds} = require('./../config/config');
 const roleService = require('./role.service');
+const {ROLE_CUSTOMER} = require('./../constants/user');
 
 const findByEmail = (email, loadRole = false) => {
   const findOptions = {where: {email}};
@@ -19,7 +20,7 @@ module.exports = {
    * @param {{firstname:string, lastname:string, birthdate:string, email:string,password:string,roleName:string}} body
    */
   create: async (body) => {
-    const roleName = body.roleName ? body.roleName : 'CUSTOMER';
+    const roleName = body.roleName ? body.roleName : ROLE_CUSTOMER;
     const role = await roleService.findByName(roleName)
     const copy = {RoleId: role.id, BusinessId: body.business_id, BranchId: body.branch_id, ...body};
     copy.name = `${body.lastname}, ${body.firstname}`
