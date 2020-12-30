@@ -1,6 +1,13 @@
 const router = require('express').Router();
 const queueService = require('../services/queue.service');
+const userService = require('../services/user.service');
 const errorHandler = require('./errorHandler');
+
+router.get('/', (req, res) => {
+  userService.findById(req.user.id)
+    .then((user) => res.json(user))
+    .catch(errorHandler.handleError(res));
+});
 
 router.get('/queues/current', (req, res) => {
   let {pageNo, resultsPerPage} = req.query;

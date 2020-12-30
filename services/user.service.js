@@ -1,9 +1,7 @@
-
 const {User, Role} = require('./../models');
 const bcrypt = require('bcrypt');
 const {saltRounds} = require('./../config/config');
 const roleService = require('./role.service');
-const { static } = require('express');
 
 const findByEmail = (email, loadRole = false) => {
   const findOptions = {where: {email}};
@@ -36,14 +34,15 @@ module.exports = {
     const user = await findByEmail(email);
     return !!user; // or user != null
   },
-  
+
   findById: async (id) => {
     const user = await User.findOne({
       where: {id: id},
-      attributes: { exclude: ['password'] }
+      attributes: {exclude: ['password']}
     });
     return user;
   },
+
   findByEmail,
   /**
    *
@@ -56,10 +55,10 @@ module.exports = {
     // TODO Completed 
     const pageOffset = resultsPerPage * (pageNo - 1);
     const total_queue_records = await User.count();
-    const userPaginated = await User.findAll({ 
-      offset: pageOffset, 
+    const userPaginated = await User.findAll({
+      offset: pageOffset,
       limit: resultsPerPage,
-      attributes: { exclude: ['password'] }
+      attributes: {exclude: ['password']}
     })
     return {
       totalRecords: total_queue_records,
@@ -70,8 +69,8 @@ module.exports = {
   //UPDATE Operations
   update: async (uID, data) => {
     /**
-    * @type {{firstname:string, lastname:string, birthdate:string, email:string, password:string}}
-    */
+     * @type {{firstname:string, lastname:string, birthdate:string, email:string, password:string}}
+     */
 
     const user = await User.findOne({where: {id: uID}});
     user.BusinessId = data.business_id;
