@@ -1,30 +1,28 @@
-const {Business, Branch, Queue, Service} = require('./../models');
-const Services = require('./service.service');
-const userServices = require('./user.service');
-const {static} = require('express');
+const {Business, Branch, Queue, Service, sequelize} = require('./../models');
 const ServiceError = require('./errors/serviceError');
-
-//const getStatus = ()
 
 module.exports = {
   /**
    *
-   * @param {{customer_id:bigint, service_id:bigint}} body
+   * @param {{user_id:bigint, service_id:bigint}} body
    */
   createQueue: async (body) => {
-    const serviceId = body.service_id;
-    const userId = body.user_id;
-    const service = await Service.findOne({where: {id: serviceId}});
-    const customer = await userServices.findById(userId);
-    const data = {UserId: customer.id, ServiceId: service.id};
-    data.customer_id = body.user_id;
-    data.service_id = body.service_id;
-    data.queue_number = service.last_in_queue + 1;
-    data.status = 1;
-    service.last_in_queue++;
-    service.save();
-    const queue = await Queue.create(data);
-    return queue.id;
+    const {user_id, service_id} = body;
+    return await sequelize.transaction(async (t) => {
+      const service = await Service.findOne({where: {id: service_id}, lock: t.LOCK.UPDATE, transaction: t});
+      const queueNumber = service.last_in_queue + 1;
+      service.last_in_queue = queueNumber;
+      return Promise.all([
+          Queue.create({
+            UserId: user_id,
+            ServiceId: service_id,
+            queue_number: queueNumber,
+            status: 'IN_QUEUE'
+          }, {transaction: t}),
+          service.save({transaction: t})
+        ]
+      ).then((promisesResult) => promisesResult[0].id);
+    });
   },
 
   findAll: async (pageNo, resultsPerPage, serviceId, status) => {
